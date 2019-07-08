@@ -12,12 +12,15 @@ import java.util.ArrayList
  * Created by leekijung on 2019. 4. 21..
  */
 
-open class DataListViewModel : ViewModel() {
+open class DataListViewModel : BaseViewModel() {
     var dataList: MutableList<Data> = ArrayList()
     var dataChanged: Variable<Boolean> = Variable(false)
     var dataListToAdd: Variable<MutableList<Data>> = Variable()
 
-    open fun getDataList(startHandler: (() -> Unit)?, successHandler: (() -> Unit)?, failureHandler: (() -> Unit)?, endHandler: (() -> Unit)?) {}
+    open fun getDataList(startHandler: (() -> Unit)?,
+                         successHandler: (() -> Unit)?,
+                         failureHandler: (() -> Unit)?,
+                         endHandler: (() -> Unit)?) {}
 
     protected fun onResponseWith(dataList: MutableList<Data>) {
         dataListToAdd.set(dataList)

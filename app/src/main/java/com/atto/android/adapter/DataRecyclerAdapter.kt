@@ -1,7 +1,7 @@
 package com.atto.android.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 
 import com.atto.android.adapter.viewholder.DataViewHolder
 import com.atto.android.mapper.DataLayoutMapper

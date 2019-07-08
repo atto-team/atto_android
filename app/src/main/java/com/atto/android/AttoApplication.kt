@@ -1,7 +1,7 @@
 package com.atto.android
 
 import android.content.Context
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 
 /**
  * Created by leekijung on 2019. 4. 21..
