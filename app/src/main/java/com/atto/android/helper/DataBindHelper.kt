@@ -2,8 +2,7 @@ package com.atto.android.helper
 
 import android.content.Context
 import com.atto.android.model.Data
-import com.atto.android.type.Type
-import com.atto.android.viewmodel.ViewModel
+import com.atto.android.viewmodel.BaseViewModel
 
 /**
  * Created by leekijung on 2019. 4. 21..
@@ -11,13 +10,13 @@ import com.atto.android.viewmodel.ViewModel
 
 class DataBindHelper {
 
-    fun bindList(list: List<Data>, context: Context, viewModel: ViewModel) {
+    fun bindList(list: List<Data>, context: Context, viewModel: BaseViewModel) {
         for (data in list) {
             bindData(data, context, viewModel)
         }
     }
 
-    private fun bindData(data: Data, context: Context, viewModel: ViewModel) {
+    private fun bindData(data: Data, context: Context, viewModel: BaseViewModel) {
     }
 
     companion object {

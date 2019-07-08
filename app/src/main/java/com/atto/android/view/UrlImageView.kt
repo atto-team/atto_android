@@ -1,8 +1,8 @@
 package com.atto.android.view
 
 import android.content.Context
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatImageView
 import com.atto.android.AttoApplication
 import com.atto.android.R
 

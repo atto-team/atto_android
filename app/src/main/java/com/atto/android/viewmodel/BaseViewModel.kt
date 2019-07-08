@@ -1,5 +1,6 @@
 package com.atto.android.viewmodel
 
+import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -7,7 +8,7 @@ import io.reactivex.disposables.Disposable
  * Created by leekijung on 2019. 4. 21..
  */
 
-open class ViewModel {
+open class BaseViewModel: ViewModel() {
 
     protected var compositeSubscription = CompositeDisposable()
 
