@@ -27,12 +27,9 @@ open class DataListActivity : BaseActivity() {
 
     open fun bindViews() {
         viewModel.dataListToAdd.asObservable().subscribe {
-            if(it != null) DataBindHelper.getInstance().bindList(it, this, viewModel)
-        }.add()
-
-        viewModel.dataChanged.asObservable().subscribe { changed ->
-            if(changed) {
-                dataRecyclerAdapter.notifyDataSetChanged()
+            if(it != null) {
+                dataRecyclerAdapter::submitList
+                DataBindHelper.getInstance().bindList(it, this, viewModel)
             }
         }.add()
 

@@ -27,13 +27,8 @@ open class DataListFragment : BaseFragment() {
     open fun bindViews() {
         viewModel.dataListToAdd.asObservable().subscribe { dataList ->
             if(dataList != null) {
+                dataRecyclerAdapter::submitList
                 context?.let{ DataBindHelper.getInstance().bindList(dataList, it, viewModel) }
-            }
-        }.add()
-
-        viewModel.dataChanged.asObservable().subscribe { changed ->
-            if(changed) {
-                dataRecyclerAdapter.notifyDataSetChanged()
             }
         }.add()
 
@@ -42,7 +37,7 @@ open class DataListFragment : BaseFragment() {
         }
     }
 
-    protected fun initData() {
+    open fun initData() {
         viewModel.getDataList(null, null, null, null)
     }
 

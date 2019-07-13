@@ -13,8 +13,7 @@ import java.util.ArrayList
  */
 
 open class DataListViewModel : BaseViewModel() {
-    var dataList: MutableList<Data> = ArrayList()
-    var dataChanged: Variable<Boolean> = Variable(false)
+    private var dataList: MutableList<Data> = ArrayList()
     var dataListToAdd: Variable<MutableList<Data>> = Variable()
 
     open fun getDataList(startHandler: (() -> Unit)?,
@@ -23,7 +22,6 @@ open class DataListViewModel : BaseViewModel() {
                          endHandler: (() -> Unit)?) {}
 
     protected fun onResponseWith(dataList: MutableList<Data>) {
-        dataListToAdd.set(dataList)
         addList(dataList)
     }
 
@@ -56,7 +54,7 @@ open class DataListViewModel : BaseViewModel() {
     }
 
     protected operator fun set(index: Int, Data: Data) {
-        dataList.set(index, Data)
+        dataList[index] = Data
         changeData()
     }
 
@@ -72,7 +70,7 @@ open class DataListViewModel : BaseViewModel() {
     }
 
     private fun changeData() {
-        dataChanged.set(true)
+        dataListToAdd.set(dataList)
     }
 
     fun refresh(endHandler: (() -> Unit)) {
@@ -95,11 +93,10 @@ open class DataListViewModel : BaseViewModel() {
                 .subscribe{ recvData ->
                     if (recvData != null) {
                         for (data in dataList) {
-                            if (recvData::class == data::class && recvData.code == data.id) {
+                            if (recvData::class == data::class && recvData.id == data.id) {
                                 val position = dataList.indexOf(data)
                                 dataList[position] = recvData
                                 changeData()
-                                dataListToAdd.set(listOf(recvData) as MutableList<Data>)
                                 break
                             }
                         }

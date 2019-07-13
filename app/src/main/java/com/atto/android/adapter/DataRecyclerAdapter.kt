@@ -1,8 +1,7 @@
 package com.atto.android.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-
+import androidx.recyclerview.widget.ListAdapter
 import com.atto.android.adapter.viewholder.DataViewHolder
 import com.atto.android.mapper.DataLayoutMapper
 import com.atto.android.mapper.DataViewHolderMapper
@@ -12,7 +11,8 @@ import com.atto.android.model.Data
  * Created by leekijung on 2019. 4. 21..
  */
 
-class DataRecyclerAdapter(private val dataList: List<Data>) : RecyclerView.Adapter<DataViewHolder>() {
+class DataRecyclerAdapter(private val dataList: List<Data>) : ListAdapter<Data, DataViewHolder>(Data.DIFF_CALLBACK) {
+
     override fun getItemCount(): Int {
         return dataList.size
     }

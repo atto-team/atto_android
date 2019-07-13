@@ -1,7 +1,6 @@
 package com.atto.android.controller.activity
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -25,7 +24,7 @@ class MainActivity : BaseActivity() {
     private val onNavigationItemSelectedListener = object: BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
-                R.id.navigation_collection -> {
+                R.id.navigation_home -> {
                     return true
                 }
                 R.id.navigation_notification -> {
