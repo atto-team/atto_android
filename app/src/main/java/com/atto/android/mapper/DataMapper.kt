@@ -21,7 +21,7 @@ class DataMapper {
 
             when (type) {
             }
-            return Data("null", type ?:"null")
+            return Data()
         }
 
         private fun convertJsonType(json: JsonObject, clazz: Class<*>): Data {

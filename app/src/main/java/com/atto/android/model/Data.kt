@@ -7,19 +7,19 @@ import android.os.Parcelable
  * Created by leekijung on 2019. 4. 21..
  */
 
-open class Data(open var code: String = "null",
+typealias DataHandler = ((Data) -> Unit)
+
+open class Data(open var id: String = "null",
                 open var type: String = "null",
-                var handler: ((Data) -> Unit) = { },
-                var detailHandler: ((Data) -> Unit) = { }
+                open var scheme: String = "null",
+                var handler: DataHandler = { },
+                var detailHandler: DataHandler = { }
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this() {
-        code = parcel.readString()
+        id = parcel.readString()
         type = parcel.readString()
-    }
-
-    interface Handler {
-        fun run(data: Data)
+        scheme = parcel.readString()
     }
 
     fun run() {
@@ -31,8 +31,9 @@ open class Data(open var code: String = "null",
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(code)
+        parcel.writeString(id)
         parcel.writeString(type)
+        parcel.writeString(scheme)
     }
 
     override fun describeContents(): Int {

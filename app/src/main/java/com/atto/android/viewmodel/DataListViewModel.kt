@@ -95,7 +95,7 @@ open class DataListViewModel : BaseViewModel() {
                 .subscribe{ recvData ->
                     if (recvData != null) {
                         for (data in dataList) {
-                            if (recvData::class == data::class && recvData.code == data.code) {
+                            if (recvData::class == data::class && recvData.code == data.id) {
                                 val position = dataList.indexOf(data)
                                 dataList[position] = recvData
                                 changeData()
