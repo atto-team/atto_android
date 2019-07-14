@@ -25,7 +25,7 @@ object ResponseHelper {
             e.printStackTrace()
         }
 
-        return ResponseData(dataList)
+        return ResponseData(dataList = dataList)
     }
 
     fun makeData(s: String): ResponseData {
