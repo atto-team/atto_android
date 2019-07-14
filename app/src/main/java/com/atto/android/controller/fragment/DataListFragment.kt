@@ -27,7 +27,7 @@ open class DataListFragment : BaseFragment() {
     open fun bindViews() {
         viewModel.dataListToAdd.asObservable().subscribe { dataList ->
             if(dataList != null) {
-                dataRecyclerAdapter::submitList
+                dataRecyclerAdapter.submitList(dataList)
                 context?.let{ DataBindHelper.getInstance().bindList(dataList, it, viewModel) }
             }
         }.add()

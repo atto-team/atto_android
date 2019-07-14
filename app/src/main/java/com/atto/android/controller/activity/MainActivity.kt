@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.atto.android.R
+import com.atto.android.adapter.AttoPagerAdapter
 import com.atto.android.controller.fragment.home.HomeFragment
 import com.atto.android.controller.fragment.mypage.MypageFragment
 import com.atto.android.controller.fragment.notification.NotificationFragment
@@ -15,7 +16,6 @@ import com.atto.android.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
@@ -29,31 +29,25 @@ class MainActivity : BaseActivity() {
     private val fmMgr: FragmentManager by lazy { supportFragmentManager }
     private lateinit var ft: FragmentTransaction
 
-    private lateinit var fragment: Fragment
-
     private val backButtonSubject = BehaviorSubject.createDefault(0L)
 
     private val onNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    fragment = HomeFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.home_tab))
+                    view_pager.currentItem = 0
                     return true
                 }
                 R.id.navigation_notification -> {
-                    fragment = NotificationFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.notification_tab))
+                    view_pager.currentItem = 1
                     return true
                 }
                 R.id.navigation_mypage -> {
-                    fragment = MypageFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.mypage_tab))
+                    view_pager.currentItem = 2
                     return true
                 }
                 R.id.navigation_shop -> {
-                    fragment = ShopFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.shop_tab))
+                    view_pager.currentItem = 3
                     return true
                 }
             }
@@ -67,7 +61,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         initViews()
-        initFragment()
+        setupViewPager()
     }
 
     private fun initViews() {
@@ -88,26 +82,24 @@ class MainActivity : BaseActivity() {
             }.add()
     }
 
-    private fun initFragment() {
-        ft = fmMgr.beginTransaction()
-        ft.addToBackStack(getString(R.string.home_tab))
-
-        fragment = HomeFragment.newInstance()
-        ft.add(R.id.menu_fragment, fragment, getString(R.string.home_tab)).commit()
+    private fun setupViewPager() {
+        view_pager.adapter = AttoPagerAdapter(
+            fmMgr, listOf(
+                HomeFragment.newInstance(),
+                NotificationFragment.newInstance(),
+                MypageFragment.newInstance(),
+                ShopFragment.newInstance()
+            ), listOf(
+                getString(R.string.notification_tab),
+                getString(R.string.notification_tab),
+                getString(R.string.mypage_tab),
+                getString(R.string.shop_tab)
+            )
+        )
+        view_pager.isPagingEnabled = false
+        navigation.setupWithViewPager(view_pager)
+        view_pager.offscreenPageLimit = navigation.itemCount
         navigation.selectedItemId = R.id.navigation_home
-    }
-
-    fun replaceFragment(fm: Fragment, fmTag: String) {
-        ft = fmMgr.beginTransaction().addToBackStack(null)
-        hideAllFragment()
-        val fragment = fmMgr.findFragmentByTag(fmTag)
-        if (fragment == null) ft.add(R.id.menu_fragment, fm, fmTag)
-        else ft.show(fragment)
-        ft.commit()
-    }
-
-    private fun hideAllFragment() {
-        fmMgr.fragments.forEach { ft.hide(it) }
     }
 
     override fun onBackPressed() {

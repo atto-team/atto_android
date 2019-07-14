@@ -1,4 +1,4 @@
-package com.atto.android.view
+package com.atto.android.view.custom
 
 import android.content.Context
 import android.util.AttributeSet
