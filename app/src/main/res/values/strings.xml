@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">atto_android</string>
+
+    <string name="home_tab">Home</string>
+    <string name="notification_tab">Notification</string>
+    <string name="mypage_tab">Mypage</string>
+    <string name="shop_tab">Shop</string>
 </resources>

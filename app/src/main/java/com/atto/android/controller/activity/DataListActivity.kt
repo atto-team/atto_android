@@ -20,7 +20,6 @@ open class DataListActivity : BaseActivity() {
     open fun initViews() {
         recyclerView = findViewById(R.id.recycler_view)
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
-        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = dataRecyclerAdapter
         swipeRefreshLayout?.setColorSchemeResources(R.color.colorPrimary)
     }

@@ -2,10 +2,8 @@ package com.atto.android.viewmodel
 
 import com.atto.android.Variable
 import com.google.gson.JsonParser
-import com.atto.android.helper.ContentUpdateHelper
 import com.atto.android.mapper.DataMapper
 import com.atto.android.model.Data
-
 import java.util.ArrayList
 
 /**
@@ -22,7 +20,7 @@ open class DataListViewModel : BaseViewModel() {
                          endHandler: (() -> Unit)?) {}
 
     protected fun onResponseWith(dataList: MutableList<Data>) {
-        addList(dataList)
+        this addList dataList
     }
 
     protected fun parseDataList(jsonString: String): List<Data> {
@@ -43,7 +41,7 @@ open class DataListViewModel : BaseViewModel() {
         return dataList
     }
 
-    protected fun add(Data: Data) {
+    protected infix fun add(Data: Data) {
         dataList.add(Data)
         changeData()
     }
@@ -58,7 +56,7 @@ open class DataListViewModel : BaseViewModel() {
         changeData()
     }
 
-    private fun addList(list: List<Data>) {
+    private infix fun addList(list: List<Data>) {
         dataList.addAll(list)
         changeData()
     }
@@ -78,29 +76,13 @@ open class DataListViewModel : BaseViewModel() {
     }
 
     fun clearHandler() {
-        for (data in dataList) {
-            data.handler = { }
-            data.detailHandler = { }
+        dataList.forEach {
+            it.handler = { }
+            it.detailHandler = { }
         }
     }
 
     fun clearDisposable() {
         compositeSubscription.clear()
-    }
-
-    protected fun subscribeCellUpdate() {
-        ContentUpdateHelper.getInstance().updateVariable.asObservable()
-                .subscribe{ recvData ->
-                    if (recvData != null) {
-                        for (data in dataList) {
-                            if (recvData::class == data::class && recvData.id == data.id) {
-                                val position = dataList.indexOf(data)
-                                dataList[position] = recvData
-                                changeData()
-                                break
-                            }
-                        }
-                    }
-                }.add()
     }
 }
