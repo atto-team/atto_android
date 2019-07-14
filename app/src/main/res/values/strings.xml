@@ -5,4 +5,7 @@
     <string name="notification_tab">Notification</string>
     <string name="mypage_tab">Mypage</string>
     <string name="shop_tab">Shop</string>
+
+    <!-- MainActivity -->
+    <string name="terminate_app_with_click_twice">뒤로가기 버튼을 한번 더 누르면 종료합니다</string>
 </resources>

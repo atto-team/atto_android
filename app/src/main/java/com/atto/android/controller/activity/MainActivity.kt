@@ -71,9 +71,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViews() {
-        /*navigation.enableAnimation(false)
+        navigation.enableAnimation(false)
         navigation.enableItemShiftingMode(false)
-        navigation.enableShiftingMode(false)*/
+        navigation.enableShiftingMode(false)
         navigation.onNavigationItemSelectedListener = onNavigationItemSelectedListener
 
         backButtonSubject.toFlowable(BackpressureStrategy.BUFFER)
@@ -83,7 +83,7 @@ class MainActivity : BaseActivity() {
                 if (t[1] - t[0] <= 1500) {
                     finish()
                 } else {
-                    toast("뒤로가기 버튼을 한번 더 누르면 종료합니다")
+                    toast(R.string.terminate_app_with_click_twice)
                 }
             }.add()
     }
