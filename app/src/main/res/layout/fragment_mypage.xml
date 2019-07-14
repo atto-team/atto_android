@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="@string/notification_tab"
+        android:text="@string/mypage_tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"

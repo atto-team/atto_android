@@ -32,18 +32,8 @@ class MainActivity : BaseActivity() {
     private lateinit var fragment: Fragment
 
     private val backButtonSubject = BehaviorSubject.createDefault(0L)
-    private val backButtonSubjectDisposable: Disposable = backButtonSubject.toFlowable(BackpressureStrategy.BUFFER)
-        .observeOn(AndroidSchedulers.mainThread())
-        .buffer(2, 1)
-        .subscribe { t ->
-            if (t[1] - t[0] <= 1500) {
-                finish()
-            } else {
-                toast("뒤로가기 버튼을 한번 더 누르면 종료합니다")
-            }
-        }
 
-    private val onNavigationItemSelectedListener = object: BottomNavigationView.OnNavigationItemSelectedListener {
+    private val onNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -53,17 +43,17 @@ class MainActivity : BaseActivity() {
                 }
                 R.id.navigation_notification -> {
                     fragment = NotificationFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.home_tab))
+                    replaceFragment(fragment, getString(R.string.notification_tab))
                     return true
                 }
                 R.id.navigation_mypage -> {
                     fragment = MypageFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.home_tab))
+                    replaceFragment(fragment, getString(R.string.mypage_tab))
                     return true
                 }
                 R.id.navigation_shop -> {
                     fragment = ShopFragment.newInstance()
-                    replaceFragment(fragment, getString(R.string.home_tab))
+                    replaceFragment(fragment, getString(R.string.shop_tab))
                     return true
                 }
             }
@@ -85,6 +75,17 @@ class MainActivity : BaseActivity() {
         navigation.enableItemShiftingMode(false)
         navigation.enableShiftingMode(false)*/
         navigation.onNavigationItemSelectedListener = onNavigationItemSelectedListener
+
+        backButtonSubject.toFlowable(BackpressureStrategy.BUFFER)
+            .observeOn(AndroidSchedulers.mainThread())
+            .buffer(2, 1)
+            .subscribe { t ->
+                if (t[1] - t[0] <= 1500) {
+                    finish()
+                } else {
+                    toast("뒤로가기 버튼을 한번 더 누르면 종료합니다")
+                }
+            }.add()
     }
 
     private fun initFragment() {
@@ -111,12 +112,5 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         backButtonSubject.onNext(System.currentTimeMillis())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!backButtonSubjectDisposable.isDisposed) {
-            backButtonSubjectDisposable.dispose()
-        }
     }
 }
