@@ -12,8 +12,8 @@ import com.atto.android.AttoApplication
 
 object ViewUtil {
     fun dpToPixel(dp: Int): Int {
-        val resources = AttoApplication.appContext.getResources()
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.getDisplayMetrics()).toInt()
+        val resources = AttoApplication.appContext.resources
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics).toInt()
     }
 
     fun clearLightStatusBar(view: View) {

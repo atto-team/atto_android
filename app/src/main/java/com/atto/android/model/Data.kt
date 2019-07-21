@@ -1,10 +1,10 @@
 package com.atto.android.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
-
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by leekijung on 2019. 4. 21..
@@ -12,18 +12,16 @@ import androidx.recyclerview.widget.DiffUtil
 
 typealias DataHandler = ((Data) -> Unit)
 
+@Parcelize
 open class Data(open var id: String = "null",
                 open var type: String = "null",
-                open var scheme: String = "null",
-                var handler: DataHandler = { },
-                var detailHandler: DataHandler = { }
+                open var scheme: String = "null"
 ) : Parcelable {
 
-    constructor(parcel: Parcel) : this() {
-        id = parcel.readString()
-        type = parcel.readString()
-        scheme = parcel.readString()
-    }
+    @IgnoredOnParcel
+    var handler: DataHandler = { }
+    @IgnoredOnParcel
+    var detailHandler: DataHandler = { }
 
     fun run() {
         handler.invoke(this)
@@ -36,30 +34,21 @@ open class Data(open var id: String = "null",
     override fun equals(obj: Any?): Boolean {
         if (obj === this)
             return true
-
         val data = obj as Data
 
         return data.id === this.id
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(type)
-        parcel.writeString(scheme)
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + type.hashCode()
+        result = 31 * result + scheme.hashCode()
+        result = 31 * result + handler.hashCode()
+        result = 31 * result + detailHandler.hashCode()
+        return result
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Data> {
-        override fun createFromParcel(parcel: Parcel): Data {
-            return Data(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Data?> {
-            return arrayOfNulls(size)
-        }
+    companion object {
 
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Data> = object : DiffUtil.ItemCallback<Data>() {
             override fun areItemsTheSame(@NonNull oldItem: Data, @NonNull newItem: Data): Boolean {

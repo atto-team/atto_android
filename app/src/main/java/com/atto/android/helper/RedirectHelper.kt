@@ -33,7 +33,7 @@ object RedirectHelper {
         for (entry in entrySet) {
             val key = entry.key
             val value = entry.value
-            when (value.javaClass.getName()) {
+            when (value.javaClass.name) {
                 "java.lang.Integer" -> intent.putExtra(key, value as Int)
                 "java.lang.String" -> intent.putExtra(key, value as String)
                 "java.lang.Boolean" -> intent.putExtra(key, value as Boolean)

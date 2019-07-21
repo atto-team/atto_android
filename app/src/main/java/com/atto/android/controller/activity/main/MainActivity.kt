@@ -1,13 +1,12 @@
-package com.atto.android.controller.activity
+package com.atto.android.controller.activity.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
 import com.atto.android.R
 import com.atto.android.adapter.AttoPagerAdapter
+import com.atto.android.controller.activity.BaseActivity
 import com.atto.android.controller.fragment.home.HomeFragment
 import com.atto.android.controller.fragment.mypage.MypageFragment
 import com.atto.android.controller.fragment.notification.NotificationFragment
@@ -19,13 +18,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Created by leekijung on 2019. 7. 9..
  */
 class MainActivity : BaseActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
+    private val viewModel by viewModel<MainViewModel> { parametersOf() }
     private val fmMgr: FragmentManager by lazy { supportFragmentManager }
     private lateinit var ft: FragmentTransaction
 
