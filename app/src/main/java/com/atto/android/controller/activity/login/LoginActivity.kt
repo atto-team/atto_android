@@ -16,6 +16,7 @@ import com.facebook.login.widget.LoginButton
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
+    //facebook
     private val TAG = "LoginActivity"
     private var callbackManager: CallbackManager? = null
     protected var facebook_login: LoginButton? = null
