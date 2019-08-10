@@ -6,7 +6,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.atto.android"
+        applicationId "com.nimontoy.android"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

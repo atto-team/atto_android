@@ -36,7 +36,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.atto.android.view.custom.PagingOptionViewPager
+        <com.nimontoy.android.view.custom.PagingOptionViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
