@@ -5,10 +5,13 @@
     <color name="colorAccent">#fc546a</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorDark">#303030</color>
     <color name="colorWhiteGrey">#EEEEEE</color>
     <color name="colorSlateGrey">#4f4b54</color>
     <color name="colorSlateSilver">#a59fac</color>
     <color name="colorClearBlue">#2699fb</color>
     <color name="colorRatingBar">#f9d14c</color>
+
+    <color name="colorDark">#303030</color>
+    <color name="colorPinkRed">#e22d43</color>
+    <color name="colorGrey">#bbbbbb</color>
 </resources>

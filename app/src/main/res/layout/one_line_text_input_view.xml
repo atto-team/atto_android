@@ -42,20 +42,21 @@
         android:layout_above="@id/div_input"/>
 
     <EditText
-        android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_text"
-        android:layout_toEndOf="@+id/input_image"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:hint="@string/project_name"
-        android:maxLines="1"
-        android:paddingBottom="10dp"
-        android:paddingStart="20dp"
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="@dimen/dimen_18dp"
-        tools:ignore="TextFields"/>
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_text"
+            android:layout_toEndOf="@+id/input_image"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:hint="@string/project_name"
+            android:maxLines="1"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/EditTheme"
+            android:textSize="@dimen/dimen_18dp"
+            tools:ignore="TextFields"/>
 
     <ImageButton
         android:id="@+id/button_image"

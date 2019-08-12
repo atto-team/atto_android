@@ -1,6 +1,7 @@
 package com.nimontoy.android.controller.activity.login
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.nimontoy.android.R
@@ -23,6 +24,11 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if (Build.VERSION.SDK_INT >= 21) { // 21 버전 이상일 때
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark));
+        }
+
 
         //facebook
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -49,6 +55,8 @@ class LoginActivity : BaseActivity() {
                     Log.d(TAG, "onError")
                 }
             })
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
