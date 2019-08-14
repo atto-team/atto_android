@@ -13,22 +13,29 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.nimontoy.android.controller.activity.main.MainActivity
-import com.nimontoy.android.helper.RedirectHelper.goToActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
     //facebook
     private val TAG = "LoginActivity"
     private lateinit var callbackManager: CallbackManager
     private lateinit var auth : FirebaseAuth
+
+    private lateinit var googleSignInClient: GoogleSignInClient
     //kakao
     //private var callback : SessionCallback? = null
 
@@ -48,7 +55,7 @@ class LoginActivity : BaseActivity() {
         //Session.getCurrentSession().addCallback(callback)
         //Session.getCurrentSession().checkAndImplicitOpen()
         //facebook 로그인
-        var facebook_login = findViewById<LoginButton>(R.id.facebook_login);
+        var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
         callbackManager = CallbackManager.Factory.create();
         auth = FirebaseAuth.getInstance()
 
@@ -81,13 +88,32 @@ class LoginActivity : BaseActivity() {
             })
 
 
+        googleLogin() // google login configure / Sing in
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) { return }
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+
+        // [google Sign in Event] Start
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account!!)
+                println (account)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e)
+                // ...
+            }
+        }
+        // [google Sign in Event] End
     }
+
+
 
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:$token")
@@ -152,4 +178,66 @@ class LoginActivity : BaseActivity() {
         }
     }
 */
+
+
+    companion object {
+        private const val RC_SIGN_IN = 9001
+    }
+
+    // [START auth_with_google]
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
+
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+                    user?.let {
+                        // Name, email address, and profile photo Url
+                        val name = user.displayName
+                        val email = user.email
+                        val photoUrl = user.photoUrl
+
+                        // Check if user's email is verified
+                        val emailVerified = user.isEmailVerified
+
+                        // The user's ID, unique to the Firebase project. Do NOT use this value to
+                        // authenticate with your backend server, if you have one. Use
+                        // FirebaseUser.getToken() instead.
+                        val uid = user.uid
+                        println (name)
+                        println (email)
+                        println (photoUrl)
+                        println (emailVerified)
+                        println (uid)
+                    }
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    updateUI(null)
+                }
+            }
+    }
+    // [END auth_with_google]
+
+    private fun googleLogin () {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        google_login.setOnClickListener {
+            googleSignIn()
+        }
+    }
+
+    private fun googleSignIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
 }
