@@ -179,6 +179,7 @@ class LoginActivity : BaseActivity() {
     private fun googleLogin () {
         google_login.setOnClickListener {
             googleLoginHelper.login()
+            startActivity(Intent (this, SignupAcitivty::class.java))
         }
     }
 }
