@@ -1,11 +1,15 @@
 package com.nimontoy.android.controller.activity.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.facebook.*
 import com.nimontoy.android.R
 import com.nimontoy.android.controller.activity.BaseActivity
@@ -19,16 +23,20 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
 import com.kakao.auth.ErrorCode
 import com.kakao.auth.ISessionCallback
+import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeResponseCallback
 import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
+import com.kakao.util.helper.Utility.getPackageInfo
+import com.kakao.util.helper.log.Logger
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
+import java.security.MessageDigest
 
-class LoginActivity : BaseActivity() {
+open class LoginActivity : BaseActivity() {
     //facebook
     private val TAG = "LoginActivity"
     private lateinit var callbackManager: CallbackManager
@@ -49,9 +57,8 @@ class LoginActivity : BaseActivity() {
 
 
         //kakao
-        callback = SessionCallback();
-        //Session.getCurrentSession().addCallback(callback)
-        //Session.getCurrentSession().checkAndImplicitOpen()
+        kakaoLogin ()
+
         //facebook 로그인
         var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
         callbackManager = CallbackManager.Factory.create();
@@ -90,8 +97,8 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) { return }
-        super.onActivityResult(requestCode, resultCode, data);
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) { return }
+
         callbackManager.onActivityResult(requestCode, resultCode, data)
 
         // [google Sign in Event] Start
@@ -109,6 +116,12 @@ class LoginActivity : BaseActivity() {
             }
         }
         // [google Sign in Event] End
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Session.getCurrentSession().removeCallback(callback)
     }
 
 
@@ -165,40 +178,70 @@ class LoginActivity : BaseActivity() {
             googleLoginHelper.login()
         }
     }
+
+    private fun kakaoLogin () {
+        callback = SessionCallback(this)
+        Session.getCurrentSession().addCallback(callback)
+        Session.getCurrentSession().checkAndImplicitOpen()
+    }
+
+
+
+    //KaKao Login
+//    private class SessionCallback() : ISessionCallback {
+//        override fun onSessionOpened(){
+//            UserManagement.getInstance().requestMe( object: MeResponseCallback() {
+//                override fun onFailure(errorResult: ErrorResult) {
+//                    var message = "failed to get user info. msg=" + errorResult
+//                    var result: ErrorCode = ErrorCode.valueOf(errorResult.getErrorCode())
+//                    println (result)
+//                    if (result == ErrorCode.CLIENT_ERROR_CODE) {
+//                        //에러로 인한 로그인 실패
+//                        //finish()
+//                    } else {
+//                        //redirectMainActivity();
+//                    }
+//                }
+//
+//                override fun onSessionClosed(errorResult: ErrorResult) {
+//                }
+//
+//                override fun onNotSignedUp() {
+//
+//                }
+//                override fun onSuccess(userProfile: UserProfile) {
+//                    //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
+//                    //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
+//                    Log.e("UserProfile", userProfile.toString())
+//                    Log.e("UserProfile", userProfile.getId().toString())
+//                    var number = userProfile.getId()
+//                }
+//            });
+//
+//        }
+//        override fun onSessionOpenFailed(exception: KakaoException) {
+//            // 세션 연결 실패
+//        }
+//    }
+
+    private class SessionCallback(val context : LoginActivity) : ISessionCallback {
+        override fun onSessionOpened() {
+            println ("FUCK")
+//            redirectSignupActivity()
+        }
+
+        override fun onSessionOpenFailed(exception : KakaoException) {
+            if (exception != null) {
+                Logger.e(exception)
+            }
+        }
+
+        fun redirectSignupActivity () {
+            val intent = Intent (context, LoginActivity::class.java)
+            context.startActivity(intent)
+            context.finish()
+        }
+    }
+
 }
 
-//KaKao Login
-private class SessionCallback() : ISessionCallback {
-    override fun onSessionOpened(){
-        UserManagement.getInstance().requestMe( object: MeResponseCallback() {
-            override fun onFailure(errorResult: ErrorResult) {
-                var message = "failed to get user info. msg=" + errorResult
-                var result: ErrorCode = ErrorCode.valueOf(errorResult.getErrorCode())
-                if (result == ErrorCode.CLIENT_ERROR_CODE) {
-                    //에러로 인한 로그인 실패
-                    //finish()
-                } else {
-                    //redirectMainActivity();
-                }
-            }
-
-            override fun onSessionClosed(errorResult: ErrorResult) {
-            }
-
-            override fun onNotSignedUp() {
-
-            }
-            override fun onSuccess(userProfile: UserProfile) {
-                //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
-                //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
-                Log.e("UserProfile", userProfile.toString())
-                Log.e("UserProfile", userProfile.getId().toString())
-                var number = userProfile.getId()
-            }
-        });
-
-    }
-    override fun onSessionOpenFailed(exception: KakaoException) {
-        // 세션 연결 실패
-    }
-}
