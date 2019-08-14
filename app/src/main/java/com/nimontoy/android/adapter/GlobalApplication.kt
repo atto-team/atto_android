@@ -16,10 +16,10 @@ object GlobalApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        KakaoSDK.init(KakaoSDKAdapter())
+
+        //KakaoSDK.init(new GlobalApplication.KakaoSDKAdapter()); <- 넣어야함
 
         obj = this
-        KakaoSDK.init(KakaoSDKAdapter())
 
         // start koin
         //startKoin(this, appModule, logger = EmptyLogger())
