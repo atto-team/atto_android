@@ -1,4 +1,4 @@
-package com.nimontoy.android.controller.activity.login
+package com.nimontoy.android.helper.login
 
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -8,9 +8,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nimontoy.android.R
+import com.nimontoy.android.controller.activity.login.LoginActivity
 
-class GoogleLogin (val context : LoginActivity) {
-    private val TAG = "GoogleLogin"
+class GoogleLoginHelper (val context : LoginActivity) {
+    private val TAG = "GoogleLoginHelper"
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -27,7 +28,9 @@ class GoogleLogin (val context : LoginActivity) {
 
     private fun googleSignIn() {
         val signInIntent = googleSignInClient.signInIntent
-        context.startActivityForResult(signInIntent, LoginActivity.RC_SIGN_IN)
+        context.startActivityForResult(signInIntent,
+            LoginActivity.RC_SIGN_IN
+        )
     }
 
     // [START auth_with_google]
