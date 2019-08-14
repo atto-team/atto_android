@@ -6,6 +6,9 @@ import android.content.Context
 import com.kakao.auth.*
 import org.koin.core.context.startKoin
 import org.koin.core.logger.EmptyLogger
+import com.kakao.auth.KakaoSDK
+
+
 
 object GlobalApplication: Application() {
     @Volatile private var obj: GlobalApplication? = null
@@ -13,6 +16,8 @@ object GlobalApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        KakaoSDK.init(KakaoSDKAdapter())
+
         obj = this
         KakaoSDK.init(KakaoSDKAdapter())
 

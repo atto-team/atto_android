@@ -1,6 +1,7 @@
 package com.nimontoy.android.controller.activity.login
 
 import android.content.Intent
+import android.content.pm.PackageInstaller
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,13 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
+import com.kakao.auth.ErrorCode
+import com.kakao.auth.ISessionCallback
+import com.kakao.network.ErrorResult
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.MeResponseCallback
+import com.kakao.usermgmt.response.model.UserProfile
+import com.kakao.util.exception.KakaoException
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
@@ -27,8 +35,7 @@ class LoginActivity : BaseActivity() {
     private lateinit var auth : FirebaseAuth
 
     private val googleLoginHelper = GoogleLoginHelper(this)
-    //kakao
-    //private var callback : SessionCallback? = null
+    private var callback : SessionCallback? = null  //kakao
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +49,7 @@ class LoginActivity : BaseActivity() {
 
 
         //kakao
-        //callback = SessionCallback();
+        callback = SessionCallback();
         //Session.getCurrentSession().addCallback(callback)
         //Session.getCurrentSession().checkAndImplicitOpen()
         //facebook 로그인
@@ -148,37 +155,50 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    //kakao
-/*
-    override fun onDestroy() {
-        super.onDestroy()
-        Session.getCurrentSession().removeCallback(callback)
-    }
-
-    private inner class SessionCallback : ISessionCallback {
-
-        override fun onSessionOpened() {
-            //val intent = Intent(this, MainActivity::class.java)
-            //startActivity(intent)
-        }
-
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-            if (exception != null) {
-                Logger.e(exception)
-            }
-        }
-    }
-*/
 
     companion object {
         const val RC_SIGN_IN = 9001
     }
 
-
-
     private fun googleLogin () {
         google_login.setOnClickListener {
             googleLoginHelper.login()
         }
+    }
+}
+
+//KaKao Login
+private class SessionCallback() : ISessionCallback {
+    override fun onSessionOpened(){
+        UserManagement.getInstance().requestMe( object: MeResponseCallback() {
+            override fun onFailure(errorResult: ErrorResult) {
+                var message = "failed to get user info. msg=" + errorResult
+                var result: ErrorCode = ErrorCode.valueOf(errorResult.getErrorCode())
+                if (result == ErrorCode.CLIENT_ERROR_CODE) {
+                    //에러로 인한 로그인 실패
+                    //finish()
+                } else {
+                    //redirectMainActivity();
+                }
+            }
+
+            override fun onSessionClosed(errorResult: ErrorResult) {
+            }
+
+            override fun onNotSignedUp() {
+
+            }
+            override fun onSuccess(userProfile: UserProfile) {
+                //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
+                //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
+                Log.e("UserProfile", userProfile.toString())
+                Log.e("UserProfile", userProfile.getId().toString())
+                var number = userProfile.getId()
+            }
+        });
+
+    }
+    override fun onSessionOpenFailed(exception: KakaoException) {
+        // 세션 연결 실패
     }
 }
