@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.facebook.*
@@ -36,8 +38,10 @@ import com.nimontoy.android.AttoApplication
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.view.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.*
 
 fun getKeyHash(context: Context): String? {
     val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
@@ -72,7 +76,7 @@ open class LoginActivity : BaseActivity() {
 
         Log.e("hashKey", getKeyHash(this))
 
-        
+
         //status bar color
         if (Build.VERSION.SDK_INT >= 21) { // 21 버전 이상일 때
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark));
@@ -84,7 +88,8 @@ open class LoginActivity : BaseActivity() {
 
         //facebook 로그인
         var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
-        callbackManager = CallbackManager.Factory.create();
+        var facebook_login_custom = findViewById<Button>(R.id.facebook_login_custom)
+        callbackManager = CallbackManager.Factory.create()
         auth = FirebaseAuth.getInstance()
 
 
@@ -94,6 +99,12 @@ open class LoginActivity : BaseActivity() {
             // intent = Intent(this, MainActivity::class.java)
             //goToActivity(this,intent)
         }
+
+        facebook_login_custom.setOnClickListener( object: View.OnClickListener {
+            override fun onClick(view: View){
+                facebook_login.performClick()
+            }
+        })
 
         facebook_login.setReadPermissions("email", "public_profile");
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -114,6 +125,7 @@ open class LoginActivity : BaseActivity() {
                     Log.d(TAG, "onError")
                 }
             })
+
 
 
         googleLogin() // google login configure / Sing in
@@ -173,21 +185,21 @@ open class LoginActivity : BaseActivity() {
 
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            /*
-            status.text = getString(R.string.facebook_status_fmt, user.displayName)
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
 
-            buttonFacebookLogin.visibility = View.GONE
-            buttonFacebookSignout.visibility = View.VISIBLE
-            */
+            //status.text = getString(R.string.facebook_status_fmt, user.displayName)
+            //detail.text = getString(R.string.firebase_status_fmt, user.uid)
+
+            //facebook_login_custom.visibility = View.GONE
+            //facebook_login_custom_signout.visibility = View.VISIBLE
+
         } else {
-            /*
-            status.setText(R.string.signed_out)
-            detail.text = null
 
-            buttonFacebookLogin.visibility = View.VISIBLE
-            buttonFacebookSignout.visibility = View.GONE
-            */
+            //status.setText(R.string.signed_out)
+            //detail.text = null
+
+            //facebook_login_custom.visibility = View.VISIBLE
+            //facebook_login_custom_signout.visibility = View.GONE
+
         }
     }
 
@@ -196,6 +208,10 @@ open class LoginActivity : BaseActivity() {
         const val RC_SIGN_IN = 9001
     }
 
+    private fun facebookLogin () {
+        
+
+    }
     private fun googleLogin () {
         google_login.setOnClickListener {
             googleLoginHelper.login()
