@@ -35,6 +35,7 @@ import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
 import com.nimontoy.android.AttoApplication
+import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
@@ -63,12 +64,11 @@ fun getKeyHash(context: Context): String? {
 open class LoginActivity : BaseActivity() {
     //facebook
     private val TAG = "LoginActivity"
-    private lateinit var callbackManager: CallbackManager
     private lateinit var auth : FirebaseAuth
-
+    private lateinit var facebookLoginHelper: FacebookLoginHelper
+    private lateinit var callbackManager: CallbackManager
     private val googleLoginHelper = GoogleLoginHelper(this)
     private var callback : SessionCallback? = null  //kakao
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,21 +76,20 @@ open class LoginActivity : BaseActivity() {
 
         Log.e("hashKey", getKeyHash(this))
 
-
         //status bar color
-        if (Build.VERSION.SDK_INT >= 21) { // 21 버전 이상일 때
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark));
-        }
+        if (Build.VERSION.SDK_INT >= 21) { getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark)); }
 
 
-        //kakao
-        kakaoLogin ()
-
-        //facebook 로그인
-        var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
-        var facebook_login_custom = findViewById<Button>(R.id.facebook_login_custom)
-        callbackManager = CallbackManager.Factory.create()
+        googleLogin()   // google login configure / Sing in
+        kakaoLogin()   //kakao
+        facebookLogin()    //facebook
         auth = FirebaseAuth.getInstance()
+        callbackManager = CallbackManager.Factory.create()
+        facebookLoginHelper = FacebookLoginHelper(this, auth)
+
+        var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
+        facebook_login.setReadPermissions("email", "public_profile");
+        facebook_login.registerCallback(callbackManager, facebookLoginHelper)
 
 
         //로그인 했을 경우 바로 메인으로
@@ -99,37 +98,8 @@ open class LoginActivity : BaseActivity() {
             // intent = Intent(this, MainActivity::class.java)
             //goToActivity(this,intent)
         }
-
-        facebook_login_custom.setOnClickListener( object: View.OnClickListener {
-            override fun onClick(view: View){
-                facebook_login.performClick()
-            }
-        })
-
-        facebook_login.setReadPermissions("email", "public_profile");
-        LoginManager.getInstance().registerCallback(callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    // App code
-                    Log.d(TAG, "onSucces LoginResult=$loginResult")
-                    handleFacebookAccessToken(loginResult.accessToken)
-                }
-
-                override fun onCancel() {
-                    // App code
-                    Log.d(TAG, "onCancel")
-                }
-
-                override fun onError(exception: FacebookException) {
-                    // App code
-                    Log.d(TAG, "onError")
-                }
-            })
-
-
-
-        googleLogin() // google login configure / Sing in
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) { return }
@@ -159,30 +129,6 @@ open class LoginActivity : BaseActivity() {
         Session.getCurrentSession().removeCallback(callback)
     }
 
-
-
-    private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
-
-        val credential = FacebookAuthProvider.getCredential(token.token)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-            }
-    }
-
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
 
@@ -209,9 +155,13 @@ open class LoginActivity : BaseActivity() {
     }
 
     private fun facebookLogin () {
-        
-
+        facebook_login_custom.setOnClickListener( object: View.OnClickListener {
+            override fun onClick(view: View){
+                facebook_login.performClick()
+            }
+        })
     }
+
     private fun googleLogin () {
         google_login.setOnClickListener {
             googleLoginHelper.login()
