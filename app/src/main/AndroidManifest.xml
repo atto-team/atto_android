@@ -19,7 +19,7 @@
 
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
-                android:value="3a894b10b608a9920ff4a76038c1942b" />
+                android:value="@string/kakao_app_key" />
         <meta-data android:name="com.facebook.sdk.ApplicationId"
                    android:value="@string/facebook_app_id"/>
 

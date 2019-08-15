@@ -69,4 +69,6 @@ class AttoApplication : MultiDexApplication() {
             return IApplicationConfig { appContext }
         }
     }
+
+
 }

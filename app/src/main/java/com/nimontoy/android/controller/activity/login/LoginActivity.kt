@@ -7,6 +7,7 @@ import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -31,10 +32,29 @@ import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
+import com.nimontoy.android.AttoApplication
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
+fun getKeyHash(context: Context): String? {
+    val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+
+    for (signature in packageInfo.signatures) {
+        try {
+            val md = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.d(AttoApplication.TAG, Base64.encodeToString(md.digest(), Base64.NO_WRAP))
+            return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+        } catch (e: NoSuchAlgorithmException) {
+            Log.w(AttoApplication.TAG, "Unable to get MessageDigest. signature=$signature", e)
+        }
+
+    }
+    return null
+}
 
 open class LoginActivity : BaseActivity() {
     //facebook
@@ -50,6 +70,9 @@ open class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        Log.e("hashKey", getKeyHash(this))
+
+        
         //status bar color
         if (Build.VERSION.SDK_INT >= 21) { // 21 버전 이상일 때
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark));
@@ -241,6 +264,7 @@ open class LoginActivity : BaseActivity() {
             context.startActivity(intent)
             context.finish()
         }
+
     }
 
 }
