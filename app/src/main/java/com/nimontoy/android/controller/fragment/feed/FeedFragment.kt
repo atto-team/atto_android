@@ -1,4 +1,4 @@
-package com.nimontoy.android.controller.fragment.notification
+package com.nimontoy.android.controller.fragment.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import com.nimontoy.android.R
 import com.nimontoy.android.controller.fragment.DataListFragment
 
-class NotificationFragment : DataListFragment() {
+class FeedFragment : DataListFragment() {
 
     companion object {
-        fun newInstance(): NotificationFragment {
-            return NotificationFragment()
+        fun newInstance(): FeedFragment {
+            return FeedFragment()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_notification, container, false)
+        val view = inflater.inflate(R.layout.fragment_feed, container, false)
         /*initViews(view)
         bindViews()
         initData()*/

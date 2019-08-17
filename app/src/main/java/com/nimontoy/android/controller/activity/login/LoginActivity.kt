@@ -35,6 +35,7 @@ import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
 import com.nimontoy.android.AttoApplication
+import com.nimontoy.android.controller.activity.main.MainActivity
 import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
@@ -73,6 +74,8 @@ open class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+//        startActivity (Intent (this, MainActivity::class.java))
 
         Log.e("hashKey", getKeyHash(this))
 
