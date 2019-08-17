@@ -1,65 +1,48 @@
 package com.nimontoy.android.controller.activity.login
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64
+
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+
 import com.facebook.*
 import com.nimontoy.android.R
 import com.nimontoy.android.controller.activity.BaseActivity
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
+
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
-import com.kakao.auth.ErrorCode
+import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeResponseCallback
-import com.kakao.usermgmt.response.model.UserProfile
+
 import com.kakao.util.exception.KakaoException
-import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
-import com.nimontoy.android.AttoApplication
 import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.view.*
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import java.util.*
 
-fun getKeyHash(context: Context): String? {
-    val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
-
-    for (signature in packageInfo.signatures) {
-        try {
-            val md = MessageDigest.getInstance("SHA")
-            md.update(signature.toByteArray())
-            Log.d(AttoApplication.TAG, Base64.encodeToString(md.digest(), Base64.NO_WRAP))
-            return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
-        } catch (e: NoSuchAlgorithmException) {
-            Log.w(AttoApplication.TAG, "Unable to get MessageDigest. signature=$signature", e)
-        }
-
-    }
-    return null
-}
+//fun getKeyHash(context: Context): String? {
+//    val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+//
+//    for (signature in packageInfo.signatures) {
+//        try {
+//            val md = MessageDigest.getInstance("SHA")
+//            md.update(signature.toByteArray())
+//            return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+//        } catch (e: NoSuchAlgorithmException) {
+//            Log.w(AttoApplication.TAG, "Unable to get MessageDigest. signature=$signature", e)
+//        }
+//
+//    }
+//    return null
+//}
 
 open class LoginActivity : BaseActivity() {
     //facebook
@@ -73,8 +56,6 @@ open class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        Log.e("hashKey", getKeyHash(this))
 
         //status bar color
         if (Build.VERSION.SDK_INT >= 21) { getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark)); }
@@ -155,7 +136,7 @@ open class LoginActivity : BaseActivity() {
     }
 
     private fun facebookLogin () {
-        facebook_login_custom.setOnClickListener( object: View.OnClickListener {
+        facebook_login_custom.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View){
                 facebook_login.performClick()
             }
@@ -169,10 +150,16 @@ open class LoginActivity : BaseActivity() {
     }
 
     private fun kakaoLogin () {
-        callback = SessionCallback(this)
-        Session.getCurrentSession().addCallback(callback)
-        Session.getCurrentSession().checkAndImplicitOpen()
+        kakao_login_custom.setOnClickListener{
+            callback = SessionCallback(this)
+
+            val session = Session.getCurrentSession()
+            session.addCallback(callback)
+            session.open(AuthType.KAKAO_LOGIN_ALL, this)
+        }
+
     }
+
 
 
 
@@ -215,11 +202,12 @@ open class LoginActivity : BaseActivity() {
 
     private class SessionCallback(val context : LoginActivity) : ISessionCallback {
         override fun onSessionOpened() {
-            println ("FUCK")
+            Log.d("KAKAO", "SUCCESS")
 //            redirectSignupActivity()
         }
 
         override fun onSessionOpenFailed(exception : KakaoException) {
+            Log.d("KAKAO", "Login fail")
             if (exception != null) {
                 Logger.e(exception)
             }
