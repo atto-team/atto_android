@@ -35,6 +35,8 @@ import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
 import com.nimontoy.android.AttoApplication
+import com.nimontoy.android.controller.activity.main.MainActivity
+import com.nimontoy.android.helper.RedirectHelper.goToActivity
 import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
@@ -62,7 +64,6 @@ fun getKeyHash(context: Context): String? {
 }
 
 open class LoginActivity : BaseActivity() {
-    //facebook
     private val TAG = "LoginActivity"
     private lateinit var auth : FirebaseAuth
     private lateinit var facebookLoginHelper: FacebookLoginHelper
@@ -95,8 +96,8 @@ open class LoginActivity : BaseActivity() {
         //로그인 했을 경우 바로 메인으로
         if(auth.currentUser != null)
         {
-            // intent = Intent(this, MainActivity::class.java)
-            //goToActivity(this,intent)
+            intent = Intent(this, MainActivity::class.java)
+            goToActivity(this,intent)
         }
     }
 

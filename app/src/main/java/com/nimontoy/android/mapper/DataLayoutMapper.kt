@@ -11,7 +11,14 @@ object DataLayoutMapper {
 
     fun map(data: Data): Int {
         if (data.type == "null" || data.type.isEmpty()) return R.layout.viewholder_empty
-        when (data.type) { }
+        when (data.type) {
+            "user_name_cell" -> {
+                return R.layout.viewholder_user_name
+            }
+            "profile_cell" -> {
+                return R.layout.viewholder_profile
+            }
+        }
         return R.layout.viewholder_empty
     }
 }
