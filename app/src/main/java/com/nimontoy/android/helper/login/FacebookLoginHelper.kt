@@ -12,6 +12,9 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.nimontoy.android.controller.activity.login.LoginActivity
 
+/**
+ * Created by leesujung on 2019. 8. 14..
+ */
 open class FacebookLoginHelper (val context : LoginActivity, var auth : FirebaseAuth) : FacebookCallback<LoginResult>{
     val TAG = "LoginActivity"
     //lateinit var auth : FirebaseAuth
