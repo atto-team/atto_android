@@ -2,6 +2,7 @@ package com.nimontoy.android.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.nimontoy.android.adapter.viewholder.DataViewHolder
 import com.nimontoy.android.mapper.DataLayoutMapper
 import com.nimontoy.android.mapper.DataViewHolderMapper
@@ -28,4 +29,5 @@ class DataRecyclerAdapter(private val dataList: List<Data>) : ListAdapter<Data, 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
+
 }

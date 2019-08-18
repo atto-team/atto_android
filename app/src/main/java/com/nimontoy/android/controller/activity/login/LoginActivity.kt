@@ -64,6 +64,7 @@ fun getKeyHash(context: Context): String? {
 }
 
 open class LoginActivity : BaseActivity() {
+    //facebook
     private val TAG = "LoginActivity"
     private lateinit var auth : FirebaseAuth
     private lateinit var facebookLoginHelper: FacebookLoginHelper

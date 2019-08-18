@@ -18,6 +18,7 @@ open class Data(open var id: String = "null",
                 open var scheme: String = "null"
 ) : Parcelable {
 
+
     @IgnoredOnParcel
     var handler: DataHandler = { }
     @IgnoredOnParcel
@@ -61,3 +62,4 @@ open class Data(open var id: String = "null",
         }
     }
 }
+

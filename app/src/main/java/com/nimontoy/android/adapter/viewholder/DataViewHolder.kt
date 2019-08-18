@@ -11,5 +11,6 @@ import com.nimontoy.android.model.Data
 abstract class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     abstract fun bindData(data: Data)
+
 }
 
