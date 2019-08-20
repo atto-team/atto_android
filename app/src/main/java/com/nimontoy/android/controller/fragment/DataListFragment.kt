@@ -1,6 +1,7 @@
 package com.nimontoy.android.controller.fragment
 
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nimontoy.android.R
@@ -17,12 +18,14 @@ open class DataListFragment : BaseFragment() {
     protected var swipeRefreshLayout: SwipeRefreshLayout? = null
 
     object testData : Data("testid", "user_name_cell", "scheme")
+    object testData2 : Data("testid", "profile_cell", "scheme")
     open fun initViews(view: View) {
-        val testDataList : List<Data> = listOf(testData)
+        val testDataList : List<Data> = listOf(testData, testData2)
         dataRecyclerAdapter = DataRecyclerAdapter(testDataList)
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout)
         recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = dataRecyclerAdapter
         swipeRefreshLayout?.setColorSchemeResources(R.color.colorPrimary)
     }
