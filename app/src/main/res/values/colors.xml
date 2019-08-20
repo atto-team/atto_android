@@ -14,4 +14,7 @@
     <color name="colorDark">#303030</color>
     <color name="colorPinkRed">#e22d43</color>
     <color name="colorGrey">#bbbbbb</color>
+
+    <color name="colorBackgroundGrey">#ededed</color>
+    <color name="colorEventCardGrey">#f2f2f2</color>
 </resources>
