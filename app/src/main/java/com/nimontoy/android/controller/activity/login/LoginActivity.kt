@@ -46,23 +46,6 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
 
-fun getKeyHash(context: Context): String? {
-    val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
-
-    for (signature in packageInfo.signatures) {
-        try {
-            val md = MessageDigest.getInstance("SHA")
-            md.update(signature.toByteArray())
-            Log.d(AttoApplication.TAG, Base64.encodeToString(md.digest(), Base64.NO_WRAP))
-            return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
-        } catch (e: NoSuchAlgorithmException) {
-            Log.w(AttoApplication.TAG, "Unable to get MessageDigest. signature=$signature", e)
-        }
-
-    }
-    return null
-}
-
 open class LoginActivity : BaseActivity() {
     //facebook
     private val TAG = "LoginActivity"
@@ -75,8 +58,6 @@ open class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        Log.e("hashKey", getKeyHash(this))
 
         //status bar color
         if (Build.VERSION.SDK_INT >= 21) { getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark)); }
@@ -174,6 +155,12 @@ open class LoginActivity : BaseActivity() {
         callback = SessionCallback(this)
         Session.getCurrentSession().addCallback(callback)
         Session.getCurrentSession().checkAndImplicitOpen()
+
+        kakao_login_custom.setOnClickListener( object: View.OnClickListener {
+            override fun onClick(view: View){
+                com_kakao_login.performClick()
+            }
+        })
     }
 
 
