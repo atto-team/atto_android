@@ -16,9 +16,9 @@ class UserCellView : ConstraintLayout{
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.profile_cell, this, false) }
 
-    val imageProfile by lazy<ImageView> { findViewById(R.id.image_profile) }
-    val textUserName by lazy<TextView> { findViewById(R.id.text_userName_profile) }
-    val textDate by lazy<TextView> { findViewById(R.id.text_date_profile) }
+    private val imageProfile by lazy<ImageView> { findViewById(R.id.image_profile) }
+    private val textUserName by lazy<TextView> { findViewById(R.id.text_userName_profile) }
+    private val textDate by lazy<TextView> { findViewById(R.id.text_date_profile) }
 
 
     constructor(context: Context) : super(context)
@@ -48,12 +48,12 @@ class UserCellView : ConstraintLayout{
     }
 
     private fun setTypeArray(typedArray: TypedArray) {
-        var imageProfileSrc = typedArray.getResourceId(R.styleable.UserCellView_image_profile_src, 0)
+        val imageProfileSrc = typedArray.getResourceId(R.styleable.UserCellView_image_profile_src, 0)
         imageProfile.setImageResource(imageProfileSrc)
-        var userName = typedArray.getString(R.styleable.UserCellView_username_text)
+        val userName = typedArray.getString(R.styleable.UserCellView_username_text)
         textUserName.text = userName
 
-        var date = typedArray.getString(R.styleable.UserCellView_date)
+        val date = typedArray.getString(R.styleable.UserCellView_date)
         textDate.text = date
 
         typedArray.recycle()

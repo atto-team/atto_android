@@ -16,4 +16,6 @@
     <color name="colorGrey">#bbbbbb</color>
 
     <color name="colorBackground">#ededed</color>
+
+    <color name="colorBlackTransparent">#80000000</color>
 </resources>

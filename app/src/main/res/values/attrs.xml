@@ -25,4 +25,13 @@
         <attr name="date" foramt="reference|string"/>
         <attr name="image_profile_src" format="reference|integer"/>
     </declare-styleable>
+
+    <declare-styleable name="CardComponentCellView">
+        <attr name="mode" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextCellView" >
+        <attr name="text" format="string" />
+    </declare-styleable>
+
 </resources>

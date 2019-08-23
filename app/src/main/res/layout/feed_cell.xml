@@ -21,9 +21,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
-    <TextView
+    <com.nimontoy.android.view.custom.ImageCellView
             android:layout_width="0dp" android:layout_height="wrap_content"
-            android:text="123i1j2p3i1j2ip3j12ip3j1pi23"
             android:id="@+id/tempView"
             android:layout_marginTop="16dp"
             android:layout_marginStart="30dp"
