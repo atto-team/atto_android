@@ -11,10 +11,6 @@ import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionConfig
 import com.kakao.auth.KakaoAdapter
 
-
-
-
-
 /**
  * Created by leekijung on 2019. 7. 9..
  */

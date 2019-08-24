@@ -20,6 +20,7 @@ import io.reactivex.functions.Consumer
 import io.reactivex.functions.Predicate
 
 import android.text.InputType.TYPE_CLASS_TEXT
+import androidx.core.content.ContextCompat
 
 /**
  * Created by leekijung on 2019. 7. 21..
@@ -116,6 +117,11 @@ class OneLineTextInputView : RxRelativeLayout {
         setVisible(imageButton, visibility)
         imageButton.setImageResource(typedArray.getResourceId(R.styleable.OneLineTextInputView_button_image_src, 0))
 
+        var color = typedArray.getResourceId(R.styleable.OneLineTextInputView_input_div_color, 0)
+        divInput.setBackgroundColor(ContextCompat.getColor(context, color))
+
+        color = typedArray.getResourceId(R.styleable.OneLineTextInputView_input_text_color, 0)
+        input.setTextColor(ContextCompat.getColor(context, color))
         typedArray.recycle()
     }
 

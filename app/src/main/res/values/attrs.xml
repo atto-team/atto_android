@@ -12,9 +12,11 @@
         <attr name="title_visibility" format="string"/>
         <attr name="option_visibility" format="string"/>
         <attr name="input_text" format="reference|string"/>
+        <attr name="input_text_color" format="reference"/>
         <attr name="input_hint" format="reference|string"/>
         <attr name="android:inputType"/>
         <attr name="input_image_src" format="reference"/>
+        <attr name="input_div_color" format="reference"/>
         <attr name="input_image_visibility" format="string"/>
         <attr name="button_image_src" format="reference"/>
         <attr name="button_image_visibility" format="string"/>

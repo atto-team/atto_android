@@ -42,7 +42,6 @@ open class LoginActivity : BaseActivity() {
             window.statusBarColor = resources.getColor(R.color.colorDark);
         }
 
-
         googleLogin()   // google login configure / Sing in
         kakaoLogin()   //kakao
         facebookLogin()    //facebook

@@ -26,10 +26,12 @@ android {
     applicationVariants.all {}
     productFlavors {
         dev {
+            manifestPlaceholders = [ appLabel: "아또 dev" ]
             dimension "mode"
             applicationIdSuffix ".dev"
         }
         production {
+            manifestPlaceholders = [ appLabel: "아또" ]
             dimension "mode"
         }
     }
