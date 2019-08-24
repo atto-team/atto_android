@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email_login_button"
         app:layout_constraintEnd_toStartOf="@+id/facebook_login_custom"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_kakao_login"
+        android:src="@drawable/ic_login_kakao"
         android:backgroundTint="@android:color/transparent"/>
 
     <com.facebook.login.widget.LoginButton
@@ -101,7 +101,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_below="@id/facebook_login"
-        android:src="@drawable/ic_facebook_login"
+        android:src="@drawable/ic_login_facebook"
         android:backgroundTint="@android:color/transparent"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/email_login_button"
@@ -118,7 +118,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/email_login_button"
-        android:src="@drawable/ic_twitter_login"
+        android:src="@drawable/ic_login_twitter"
         android:backgroundTint="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@+id/facebook_login_custom"
         android:layout_marginStart="8dp"/>
@@ -131,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/email_login_button"
-        android:src="@drawable/ic_google_login"
+        android:src="@drawable/ic_login_google"
         android:backgroundTint="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@+id/twitter_login"
         android:layout_marginStart="8dp"/>
