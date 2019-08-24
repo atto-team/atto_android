@@ -5,4 +5,5 @@ package com.nimontoy.android.basic
  */
 
 enum class Type(var type: String) {
+
 }

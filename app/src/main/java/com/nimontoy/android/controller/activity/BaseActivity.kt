@@ -1,6 +1,9 @@
 package com.nimontoy.android.controller.activity
 
+import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import com.nimontoy.android.R
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -13,12 +16,22 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        checkStatusBarColor()
+
         setupStartWindowAnimator()
     }
 
     override fun finish() {
         super.finish()
         setupEndWindowAnimator()
+    }
+
+    private fun checkStatusBarColor() {
+        //status bar color
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.statusBarColor = ContextCompat.getColor(this, R.color.colorDark)
+        }
     }
 
     protected fun setupStartWindowAnimator() {

@@ -9,11 +9,13 @@ import android.os.Parcelable
 import java.util.ArrayList
 
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import com.nimontoy.android.controller.activity.main.MainActivity
+import kotlin.reflect.KClass
 
 object RedirectHelper {
 
-    fun goToActivity(activity: Activity, clz: Class<*>, extraMap: Map<String, Any>) {
-        val intent = Intent(activity.applicationContext, clz)
+    fun goToActivity(activity: Activity, clz: KClass<*>, extraMap: Map<String, Any>) {
+        val intent = Intent(activity.applicationContext, clz.java)
         activity.startActivity(checkTypeAndPutIntent(intent, extraMap.entries))
     }
 
@@ -21,12 +23,16 @@ object RedirectHelper {
         context.startActivity(intent)
     }
 
-    fun goToActivity(context: Context, clz: Class<*>, extraMap: Map<String, Any>) {
-        val intent = Intent(context, clz)
+    fun goToActivity(context: Context, clz: KClass<*>, extraMap: Map<String, Any> = mapOf()) {
+        val intent = Intent(context, clz.java)
         if (context !is Activity) {
             intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         }
-        context.startActivity(checkTypeAndPutIntent(intent, extraMap.entries))
+        context.startActivity(
+            if(extraMap.isNotEmpty())
+                checkTypeAndPutIntent(intent, extraMap.entries)
+            else intent
+        )
     }
 
     private fun checkTypeAndPutIntent(intent: Intent, entrySet: Set<Map.Entry<String, Any>>): Intent {
@@ -45,4 +51,7 @@ object RedirectHelper {
         return intent
     }
 
+    fun goToMain(context: Context) {
+        goToActivity(context, MainActivity::class)
+    }
 }

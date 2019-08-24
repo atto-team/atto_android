@@ -6,35 +6,30 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nimontoy.android.R
+import com.nimontoy.android.Variable
+import com.nimontoy.android.basic.StatusCode
 import com.nimontoy.android.controller.activity.login.LoginActivity
 
-class GoogleLoginHelper (val context : LoginActivity) {
+class GoogleLoginHelper(val context: LoginActivity, val userVariable: Variable<FirebaseUser>) {
     private val TAG = "GoogleLoginHelper"
 
-    private lateinit var googleSignInClient: GoogleSignInClient
-
-    fun login () {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+    private val gso by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
-        googleSignInClient = GoogleSignIn.getClient(context, gso)
-
-        googleSignIn()
     }
 
-    private fun googleSignIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        context.startActivityForResult(signInIntent,
-            LoginActivity.RC_SIGN_IN
-        )
+    private val googleSignInClient: GoogleSignInClient by lazy { GoogleSignIn.getClient(context, gso) }
+
+    fun login() {
+        context.startActivityForResult(googleSignInClient.signInIntent, StatusCode.RC_SIGN_IN.code)
     }
 
-    // [START auth_with_google]
-    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount, auth : FirebaseAuth) {
+    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount, auth: FirebaseAuth) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
@@ -57,19 +52,19 @@ class GoogleLoginHelper (val context : LoginActivity) {
                         // authenticate with your backend server, if you have one. Use
                         // FirebaseUser.getToken() instead.
                         val uid = user.uid
-                        println (name)
-                        println (email)
-                        println (photoUrl)
-                        println (emailVerified)
-                        println (uid)
+                        println(name)
+                        println(email)
+                        println(photoUrl)
+                        println(emailVerified)
+                        println(uid)
+
+                        userVariable.set(user)
                     }
-                    context.updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    context.updateUI(null)
+                    userVariable.set()
                 }
             }
     }
-    // [END auth_with_google]
 }
