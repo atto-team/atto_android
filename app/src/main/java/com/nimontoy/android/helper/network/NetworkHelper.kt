@@ -1,12 +1,12 @@
 package com.nimontoy.android.helper.network
 
 import android.annotation.SuppressLint
-import com.nimontoy.android.BuildConfig
 import com.nimontoy.android.basic.BaseUrl
 import com.nimontoy.android.helper.MinorHelper
 import com.nimontoy.android.helper.MinorHelper.toast
 import com.nimontoy.android.util.UnicodeUtil
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.nimontoy.android.BuildConfig
 import io.reactivex.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -45,8 +45,8 @@ open class NetworkHelper {
             headerInterceptor = Interceptor { chain ->
                 val request = chain.request()
                 val builder = request.newBuilder()
-                    .header("X-Sungbak-Version", "android/" + BuildConfig.VERSION_NAME)
-                    .header("Accept", "application/vnd.sungbak.v1+json")
+                    .header("X-Atto-Version", "android/" + BuildConfig.VERSION_NAME)
+                    .header("Accept", "application/vnd.atto.v1+json")
                     .header("Content-CellType", "text/plain; charset=utf-8")
                     .header("Connection", "close")
                     .header("Authorization", "Bearer ")
@@ -97,11 +97,11 @@ open class NetworkHelper {
                     }
                     503 -> {
                         MinorHelper.logDebug(TAG, response.message())
-                        MinorHelper.toast("현재 서버에 문제가 있습니다.")
+                        toast("현재 서버에 문제가 있습니다.")
                     }
                     504 -> {
                         MinorHelper.logDebug(TAG, response.message())
-                        MinorHelper.toast("요청시간이 초과되었습니다.")
+                        toast("요청시간이 초과되었습니다.")
                     }
                 }
                 response

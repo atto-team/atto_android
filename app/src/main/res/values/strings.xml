@@ -16,5 +16,9 @@
 
     <!-- kakao-->
     <string name="kakao_app_key">90ab119781bacdf6722e928c4527d76a</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forget_account">Forget account?</string>
+
+    <string name="login_text">Log in</string>
 
 </resources>

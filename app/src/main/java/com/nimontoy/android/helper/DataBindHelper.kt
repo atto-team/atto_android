@@ -17,6 +17,7 @@ class DataBindHelper {
     }
 
     private fun bindData(data: Data, context: Context, viewModel: BaseViewModel) {
+
     }
 
     companion object {

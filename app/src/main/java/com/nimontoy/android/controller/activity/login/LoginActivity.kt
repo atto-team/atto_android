@@ -1,50 +1,28 @@
 package com.nimontoy.android.controller.activity.login
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.facebook.*
 import com.nimontoy.android.R
 import com.nimontoy.android.controller.activity.BaseActivity
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
-import com.kakao.auth.ErrorCode
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeResponseCallback
-import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
-import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
-import com.nimontoy.android.AttoApplication
 import com.nimontoy.android.controller.activity.main.MainActivity
 import com.nimontoy.android.helper.RedirectHelper.goToActivity
 import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.view.*
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import java.util.*
 
 open class LoginActivity : BaseActivity() {
     //facebook
@@ -53,14 +31,16 @@ open class LoginActivity : BaseActivity() {
     private lateinit var facebookLoginHelper: FacebookLoginHelper
     private lateinit var callbackManager: CallbackManager
     private val googleLoginHelper = GoogleLoginHelper(this)
-    private var callback : SessionCallback? = null  //kakao
+    private var callbackKakao : KakaoSessionCallback? = null  //kakao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         //status bar color
-        if (Build.VERSION.SDK_INT >= 21) { getWindow().setStatusBarColor(getResources().getColor(R.color.colorDark)); }
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.statusBarColor = resources.getColor(R.color.colorDark);
+        }
 
 
         googleLogin()   // google login configure / Sing in
@@ -71,13 +51,12 @@ open class LoginActivity : BaseActivity() {
         facebookLoginHelper = FacebookLoginHelper(this, auth)
 
         var facebook_login = findViewById<LoginButton>(R.id.facebook_login)
-        facebook_login.setReadPermissions("email", "public_profile");
+        facebook_login.setReadPermissions("email", "public_profile")
         facebook_login.registerCallback(callbackManager, facebookLoginHelper)
 
 
         //로그인 했을 경우 바로 메인으로
-        if(auth.currentUser != null)
-        {
+        if(auth.currentUser != null) {
             intent = Intent(this, MainActivity::class.java)
             goToActivity(this,intent)
         }
@@ -109,7 +88,7 @@ open class LoginActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Session.getCurrentSession().removeCallback(callback)
+        Session.getCurrentSession().removeCallback(callbackKakao)
     }
 
     fun updateUI(user: FirebaseUser?) {
@@ -152,8 +131,8 @@ open class LoginActivity : BaseActivity() {
     }
 
     private fun kakaoLogin () {
-        callback = SessionCallback(this)
-        Session.getCurrentSession().addCallback(callback)
+        callbackKakao = KakaoSessionCallback(this)
+        Session.getCurrentSession().addCallback(callbackKakao)
         Session.getCurrentSession().checkAndImplicitOpen()
 
         kakao_login_custom.setOnClickListener( object: View.OnClickListener {
@@ -166,7 +145,7 @@ open class LoginActivity : BaseActivity() {
 
 
     //KaKao Login
-//    private class SessionCallback() : ISessionCallback {
+//    private class KakaoSessionCallback() : ISessionCallback {
 //        override fun onSessionOpened(){
 //            UserManagement.getInstance().requestMe( object: MeResponseCallback() {
 //                override fun onFailure(errorResult: ErrorResult) {
@@ -202,7 +181,7 @@ open class LoginActivity : BaseActivity() {
 //        }
 //    }
 
-    private class SessionCallback(val context : LoginActivity) : ISessionCallback {
+    private class KakaoSessionCallback(val context : LoginActivity) : ISessionCallback {
         override fun onSessionOpened() {
             println ("FUCK")
 //            redirectSignupActivity()
