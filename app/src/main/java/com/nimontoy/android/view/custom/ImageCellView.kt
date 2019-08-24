@@ -37,12 +37,12 @@ class ImageCellView : ConstraintLayout {
     }
 
     private fun getAttrs(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.UserCellView)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImageCellView)
         setTypeArray(typedArray)
     }
 
     private fun getAttrs(attrs: AttributeSet?, defStyle: Int) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.UserCellView, defStyle, 0)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImageCellView, defStyle, 0)
         setTypeArray(typedArray)
     }
 
@@ -78,7 +78,7 @@ class ImageCellView : ConstraintLayout {
                 setImageSecond(image_list[1])
                 setImageThird(image_list[2])
 
-                setTextExtra((image_list.size - 3).toString())
+                setTextExtra('+' + (image_list.size - 3).toString())
                 setBlackBackground()
             }
         }
@@ -101,7 +101,7 @@ class ImageCellView : ConstraintLayout {
     }
 
     fun setBlackBackground () {
-        imageThird.alpha = 0.5F
+        imageThird.alpha = 0.9F
         imageThird.setBackgroundResource(R.color.colorBlackTransparent)
     }
 }

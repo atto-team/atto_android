@@ -2,35 +2,22 @@ package com.nimontoy.android.controller.activity.login
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.facebook.*
 import com.nimontoy.android.R
 import com.nimontoy.android.controller.activity.BaseActivity
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
-import com.kakao.auth.ErrorCode
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeResponseCallback
-import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.kakao.util.helper.log.Logger
@@ -40,10 +27,8 @@ import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.view.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.util.*
 
 fun getKeyHash(context: Context): String? {
     val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
@@ -75,7 +60,7 @@ open class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        startActivity (Intent (this, MainActivity::class.java))
+        startActivity (Intent (this, MainActivity::class.java))
 
         Log.e("hashKey", getKeyHash(this))
 

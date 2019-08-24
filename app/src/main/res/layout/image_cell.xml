@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageSecond"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kakaoaccount_icon" />
+        app:srcCompat="@drawable/kakaoaccount_icon"/>
 
     <ImageView
         android:id="@+id/imageSecond"

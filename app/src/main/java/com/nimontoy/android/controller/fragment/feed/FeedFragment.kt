@@ -29,21 +29,28 @@ class FeedFragment : DataListFragment() {
     }
 
     override fun initViews(view: View) {
-        super.initViews(view)
-
-        imageCellView = view.findViewById(R.id.tempView)
+        imageCellView = view.findViewById(R.id.imageCellView)
     }
 
     override fun bindViews() {
-        super.bindViews()
 
         val images = ArrayList<Int> ()
-        images.add(R.drawable.com_facebook_auth_dialog_background)
+        images.add(R.drawable.kakaoaccount_icon)
+        images.add(R.drawable.kakaoaccount_icon)
+        images.add(R.drawable.kakaoaccount_icon)
+        images.add(R.drawable.kakaoaccount_icon)
+        images.add(R.drawable.kakaoaccount_icon)
+        images.add(R.drawable.kakaoaccount_icon)
+
+
         imageCellView.setImage(images)
     }
 
     override fun initData() {
-        super.initData()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 
 }
