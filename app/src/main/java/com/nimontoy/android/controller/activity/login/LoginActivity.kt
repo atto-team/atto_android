@@ -12,20 +12,26 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.android.gms.common.api.ApiException
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
-import com.kakao.usermgmt.response.model.UserProfile
 import com.nimontoy.android.Variable
-import com.nimontoy.android.basic.StatusCode
+import com.nimontoy.android.basic.Code
 import com.nimontoy.android.helper.RedirectHelper.goToMain
 import com.nimontoy.android.helper.login.FacebookLoginHelper
 
 import com.nimontoy.android.helper.login.GoogleLoginHelper
 import com.nimontoy.android.helper.login.KakaoLoginHelper
+import com.nimontoy.android.helper.login.KakaoUser
+import com.nimontoy.android.helper.session.SessionHelper
 import kotlinx.android.synthetic.main.activity_login.*
+import android.content.pm.PackageManager
+import android.content.Context
+import android.util.Base64
+import com.kakao.util.helper.Utility.getPackageInfo
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 typealias FacebookCallback = CallbackManager
 
 class LoginActivity : BaseActivity() {
-    //facebook
     private val TAG = "LoginActivity"
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -43,6 +49,8 @@ class LoginActivity : BaseActivity() {
         initViews()
 
         checkAuth()
+
+        Log.e("hash key", getKeyHash(this))
     }
 
     private fun initViews() {
@@ -83,15 +91,37 @@ class LoginActivity : BaseActivity() {
         kakao_login_button.setOnClickListener {
             kakao_login.performClick()
             kakaoLoginHelper.userVariable.asObservable().subscribe {
-                it?.let { doAfterCheckUser(userProfile = it) }
+                it?.let { doAfterCheckUser(kakaoUser = it) }
             }.add()
         }
     }
 
-    private fun doAfterCheckUser(firebaseUser: FirebaseUser? = null, userProfile: UserProfile? = null) {
+    private fun doAfterCheckUser(firebaseUser: FirebaseUser? = null, kakaoUser: KakaoUser? = null) {
         // TODO 유저 정보 등록 및 후 기능...
-        firebaseUser?.let {  }
-        userProfile?.let {  }
+        if(firebaseUser != null || kakaoUser != null) {
+            firebaseUser?.let { user ->
+                with(user) {
+                    SessionHelper.userEmail = email.toString()
+                    SessionHelper.userName = displayName.toString()
+                    SessionHelper.userPhone = phoneNumber.toString()
+                    getIdToken(true).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            task.result?.token?.let { SessionHelper.storeAccessToken(it) }
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                }
+            }
+            kakaoUser?.let { user ->
+                with(user) {
+                    SessionHelper.userId = id.toInt()
+                    SessionHelper.userEmail = email.toString()
+                    SessionHelper.userName = nickname.toString()
+                }
+            }
+            SessionHelper.setLogined()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -106,7 +136,7 @@ class LoginActivity : BaseActivity() {
         Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)
 
     private fun handleGoogleResult(requestCode: Int, data: Intent?) {
-        if (requestCode == StatusCode.RC_SIGN_IN.code) {
+        if (requestCode == Code.GOOGLE_SIGN_IN.code) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -131,5 +161,21 @@ class LoginActivity : BaseActivity() {
 
     private fun removeKakaoCallback(kakaoCallback: ISessionCallback) =
         Session.getCurrentSession().removeCallback(kakaoCallback)
+
+    fun getKeyHash(context: Context): String? {
+        val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+
+        for (signature in packageInfo!!.signatures) {
+            try {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+            } catch (e: NoSuchAlgorithmException) {
+                Log.w(TAG, "Unable to get MessageDigest. signature=$signature", e)
+            }
+
+        }
+        return null
+    }
 }
 

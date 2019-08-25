@@ -11,23 +11,12 @@ import com.nimontoy.android.adapter.viewholder.*
  */
 
 object DataViewHolderMapper {
+
+    //TODO 셀에 대한 구현은 각자 작업해둔 브랜치에서 해둘 것
     fun map(parent: ViewGroup, layoutId: Int): DataViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         when (layoutId) {
-            //test by leesujeong on 2019. 8. 20..
-            R.layout.viewholder_header -> {  //R.layout.viewholder_user_name
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_header, parent, false)
-                return UserNameViewHolder(view)
-            }
-            R.layout.viewholder_profile -> { //R.layout.viewholder_profile
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_profile, parent, false)
-                return ProfileViewHolder(view)
-            }
-            R.layout.viewholder_event_card -> { //R.layout.viewholder_profile
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_event_card, parent, false)
-                return EventCardViewHolder(view)
-            }
-            //end test
+
         }
         return EmptyViewHolder(itemView)
     }

@@ -6,12 +6,11 @@ import android.preference.PreferenceManager
 import com.nimontoy.android.AttoApplication
 
 /**
- * Created by gwaghuijong on 2018. 5. 17..
+ * Created by leekijung on 2019. 8. 25..
  */
 
 object PreferencesHelper {
-    private val pref: SharedPreferences
-        get() = PreferenceManager.getDefaultSharedPreferences(AttoApplication.appContext)
+    private val pref: SharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(AttoApplication.appContext) }
 
     internal fun remove(key: String) {
         val edit = pref.edit()
@@ -41,14 +40,14 @@ object PreferencesHelper {
         return pref.contains(key)
     }
 
-    internal fun getString(key: String, defaultValue: String): String? {
+    internal fun getString(key: String, defaultValue: String): String {
         val pref = pref
-        return pref.getString(key, defaultValue)
+        return pref.getString(key, defaultValue) ?: ""
     }
 
     internal fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         val value = getString(key, "")
-        return if (value!!.isEmpty()) {
+        return if (value.isEmpty()) {
             defaultValue
         } else {
             try {
@@ -62,7 +61,7 @@ object PreferencesHelper {
 
     internal fun getInt(key: String, defaultValue: Int): Int {
         val value = getString(key, "")
-        return if (value!!.isEmpty()) {
+        return if (value.isEmpty()) {
             defaultValue
         } else {
             try {
@@ -76,7 +75,7 @@ object PreferencesHelper {
 
     internal fun getFloat(key: String, defaultValue: Float): Float {
         val value = getString(key, "")
-        return if (value!!.isEmpty()) {
+        return if (value.isEmpty()) {
             defaultValue
         } else {
             try {

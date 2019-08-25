@@ -9,6 +9,7 @@ import android.os.Parcelable
 import java.util.ArrayList
 
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import com.nimontoy.android.basic.Code
 import com.nimontoy.android.controller.activity.main.MainActivity
 import kotlin.reflect.KClass
 
@@ -53,5 +54,19 @@ object RedirectHelper {
 
     fun goToMain(context: Context) {
         goToActivity(context, MainActivity::class)
+    }
+
+    fun reloadRoot(activity: Activity, isLogout: Boolean = false) {
+        val intent = activity.applicationContext.packageManager
+            .getLaunchIntentForPackage(activity.applicationContext.packageName)
+        intent?.let {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            if (!isLogout)
+                intent.putExtra("isLogout", Code.LOGIN_SUCCESS.code)
+            else
+                intent.putExtra("isLogout", Code.LOGOUT_SUCCESS.code)
+            goToActivity(activity.applicationContext, intent)
+        }
+        activity.finish()
     }
 }

@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nimontoy.android.R
 import com.nimontoy.android.Variable
-import com.nimontoy.android.basic.StatusCode
+import com.nimontoy.android.basic.Code
 import com.nimontoy.android.controller.activity.login.LoginActivity
 
 class GoogleLoginHelper(val context: LoginActivity, val userVariable: Variable<FirebaseUser>) {
@@ -26,7 +26,7 @@ class GoogleLoginHelper(val context: LoginActivity, val userVariable: Variable<F
     private val googleSignInClient: GoogleSignInClient by lazy { GoogleSignIn.getClient(context, gso) }
 
     fun login() {
-        context.startActivityForResult(googleSignInClient.signInIntent, StatusCode.RC_SIGN_IN.code)
+        context.startActivityForResult(googleSignInClient.signInIntent, Code.GOOGLE_SIGN_IN.code)
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount, auth: FirebaseAuth) {

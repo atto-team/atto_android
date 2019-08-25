@@ -14,7 +14,8 @@ import com.nimontoy.android.controller.activity.login.LoginActivity
 /**
  * Created by leesujung on 2019. 8. 14..
  */
-open class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variable<UserProfile>) : ISessionCallback {
+typealias KakaoUser = UserProfile
+open class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variable<KakaoUser>) : ISessionCallback {
 
     val TAG = "KakaoLoginHelper"
 
@@ -22,29 +23,31 @@ open class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variab
         UserManagement.getInstance().requestMe(object : MeResponseCallback() {
             override fun onFailure(errorResult: ErrorResult) {
                 var message = "failed to get user info. msg=$errorResult"
+                Log.e("ErrorResult", message)
                 var result: ErrorCode = ErrorCode.valueOf(errorResult.errorCode)
-                println(result)
                 if (result == ErrorCode.CLIENT_ERROR_CODE) {
                     //에러로 인한 로그인 실패
                     //finish()
                 } else {
-                    //redirectMainActivity();
+                    //TODO 서버 체크해서 이미 회원가입 되어 있다면 300 code로 메인화면, 회원가입 안되어 있다면 200으로 goToSignUp
                 }
             }
 
-            override fun onSessionClosed(errorResult: ErrorResult) { }
+            override fun onSessionClosed(errorResult: ErrorResult) {
+                Log.e("ErrorResult", errorResult.errorMessage)
+            }
 
             override fun onNotSignedUp() {
 
             }
 
-            override fun onSuccess(userProfile: UserProfile) {
+            override fun onSuccess(KakaoUser: KakaoUser) {
                 //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                 //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
-                Log.e("UserProfile", userProfile.toString())
-                Log.e("UserProfile", userProfile.getId().toString())
-                var number = userProfile.getId()
-                userVariable.set(userProfile)
+                Log.e("KakaoUser", KakaoUser.toString())
+                Log.e("KakaoUser", KakaoUser.id.toString())
+                var number = KakaoUser.getId()
+                userVariable.set(KakaoUser)
             }
         })
 
@@ -52,6 +55,7 @@ open class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variab
 
     override fun onSessionOpenFailed(exception: KakaoException) {
         // 세션 연결 실패
+        Log.e("onSessionOpenFailed", exception.message)
     }
 
 
