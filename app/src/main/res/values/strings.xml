@@ -10,12 +10,6 @@
     <!-- MainActivity -->
     <string name="terminate_app_with_click_twice">뒤로가기 버튼을 한번 더 누르면 종료합니다</string>
 
-    <!-- facebook-->
-    <string name="facebook_app_id">634398027049573</string>
-    <string name="fb_login_protocol_scheme">fb634398027049573</string>
-
-    <!-- kakao-->
-    <string name="kakao_app_key">90ab119781bacdf6722e928c4527d76a</string>
     <string name="sign_up">Sign up</string>
     <string name="forget_account">Forget account?</string>
 

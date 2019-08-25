@@ -13,7 +13,6 @@ import com.nimontoy.android.helper.session.KakaoSDKAdapter
 
 class AttoApplication : MultiDexApplication() {
 
-
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext

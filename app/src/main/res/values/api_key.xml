@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- fabric -->
     <string name="fabric_api_key">239d55d536dc653c8ac7c3fbaaf54824c92311d3</string>
+
+    <!-- facebook-->
+    <string name="facebook_app_id">634398027049573</string>
+    <string name="fb_login_protocol_scheme">fb634398027049573</string>
+
+    <!-- kakao-->
+    <string name="kakao_app_key">90ab119781bacdf6722e928c4527d76a</string>
 </resources>
