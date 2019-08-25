@@ -14,8 +14,8 @@ class CardComponentCellView : ConstraintLayout {
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.card_component_cell, this, false) }
 
-    private val iconCardComponent by lazy<ImageView> { findViewById(R.id.icon_card_component) }
-    private val textCardComponent by lazy<TextView> { findViewById(R.id.text_card_component) }
+    val iconCardComponent by lazy<ImageView> { findViewById(R.id.icon_card_component) }
+    val textCardComponent by lazy<TextView> { findViewById(R.id.text_card_component) }
 
     constructor(context: Context) : super(context)
 

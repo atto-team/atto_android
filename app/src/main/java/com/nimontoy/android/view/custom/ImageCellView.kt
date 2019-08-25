@@ -14,11 +14,11 @@ class ImageCellView : ConstraintLayout {
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.image_cell, this, false) }
 
-    private val imageFirst by lazy<ImageView> { findViewById(R.id.imageFirst) }
-    private val imageSecond by lazy<ImageView> { findViewById(R.id.imageSecond) }
-    private val imageThird by lazy<ImageView> { findViewById(R.id.imageThird) }
+    val imageFirst by lazy<ImageView> { findViewById(R.id.imageFirst) }
+    val imageSecond by lazy<ImageView> { findViewById(R.id.imageSecond) }
+    val imageThird by lazy<ImageView> { findViewById(R.id.imageThird) }
 
-    private val textExtra by lazy<TextView> { findViewById(R.id.textExtra) }
+    val textExtra by lazy<TextView> { findViewById(R.id.textExtra) }
 
     constructor(context: Context) : super(context)
 

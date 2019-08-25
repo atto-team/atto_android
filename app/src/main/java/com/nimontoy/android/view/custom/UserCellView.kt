@@ -16,9 +16,9 @@ class UserCellView : ConstraintLayout{
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.profile_cell, this, false) }
 
-    private val imageProfile by lazy<ImageView> { findViewById(R.id.image_profile) }
-    private val textUserName by lazy<TextView> { findViewById(R.id.text_userName_profile) }
-    private val textDate by lazy<TextView> { findViewById(R.id.text_date_profile) }
+    val imageProfile by lazy<ImageView> { findViewById(R.id.image_profile) }
+    val textUserName by lazy<TextView> { findViewById(R.id.text_userName_profile) }
+    val textDate by lazy<TextView> { findViewById(R.id.text_date_profile) }
 
 
     constructor(context: Context) : super(context)
