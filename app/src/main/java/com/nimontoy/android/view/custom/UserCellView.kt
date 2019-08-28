@@ -67,7 +67,7 @@ class UserCellView : ConstraintLayout{
         textUserName.text = userName
     }
 
-    fun setDateText (date : String) {
+    fun setDateTimeText (date : String) {
         textDate.text = date
     }
 }

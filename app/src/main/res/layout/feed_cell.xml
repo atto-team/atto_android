@@ -1,53 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <View android:layout_width="match_parent" android:layout_height="8dp" android:background="@color/colorBackground"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent" android:id="@+id/top_bound"/>
+    <View
+        android:id="@+id/top_bound"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.nimontoy.android.view.custom.UserCellView
-            android:id="@+id/user_cell_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:username_text="JuHyang"
-            app:date="12|34"
-            android:layout_marginTop="20dp"
-            app:image_profile_src="@drawable/icon_like" app:layout_constraintTop_toBottomOf="@+id/top_bound"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+        android:id="@+id/user_cell_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:date="12|34"
+        app:image_profile_src="@drawable/icon_like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bound"
+        app:username_text="JuHyang" />
+
+    <com.nimontoy.android.view.custom.TextCellView
+        android:id="@+id/text_cell_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/user_cell_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.nimontoy.android.view.custom.ImageCellView
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:id="@+id/imageCellView"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_cell_view"/>
+        android:id="@+id/image_cell_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_cell_view" />
 
-    <View android:layout_width="0dp" android:layout_height="2dp"
-          android:background="@color/colorBackground"
-          android:layout_marginTop="24dp"
-          android:layout_marginStart="30dp"
-          android:layout_marginEnd="30dp"
-          android:id="@+id/bottom_bound"
-          app:layout_constraintTop_toBottomOf="@id/imageCellView"
-          app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View
+        android:id="@+id/bottom_bound"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_cell_view" />
 
-    <include
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            layout="@layout/elements_cell"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="6dp"
-            tools:layout_editor_absoluteY="608dp" tools:layout_editor_absoluteX="0dp"
-            app:layout_constraintTop_toBottomOf="@id/bottom_bound"
-            android:id="@+id/elements_cell"/>
+    <com.nimontoy.android.view.custom.ElementsCellView
+        android:id="@+id/elements_cell_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_bound" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

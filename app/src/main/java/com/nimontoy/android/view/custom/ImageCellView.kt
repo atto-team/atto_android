@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.nimontoy.android.R
 
 class ImageCellView : ConstraintLayout {
@@ -54,7 +55,6 @@ class ImageCellView : ConstraintLayout {
         when (image_list.size) {
             1 -> {
                 setImageFirst(image_list[0])
-
                 imageSecond.visibility = View.GONE
                 imageThird.visibility = View.GONE
                 textExtra.visibility = View.GONE
@@ -71,12 +71,16 @@ class ImageCellView : ConstraintLayout {
                 setImageSecond(image_list[1])
                 setImageThird(image_list[2])
 
+                changeImageWidth()
+
                 textExtra.visibility = View.GONE
             }
             else -> {
                 setImageFirst(image_list[0])
                 setImageSecond(image_list[1])
                 setImageThird(image_list[2])
+
+                changeImageWidth()
 
                 setTextExtra('+' + (image_list.size - 3).toString())
                 setBlackBackground()
@@ -96,12 +100,19 @@ class ImageCellView : ConstraintLayout {
         imageThird.setImageResource(image_res)
     }
 
-    fun setTextExtra (userName : String) {
-        textExtra.text = userName
+    fun setTextExtra (text_extra : String) {
+        textExtra.text = text_extra
     }
 
     fun setBlackBackground () {
         imageThird.alpha = 0.9F
         imageThird.setBackgroundResource(R.color.colorBlackTransparent)
+    }
+
+    fun changeImageWidth () {
+        val set = ConstraintSet()
+        set.clone(this)
+        set.constrainPercentWidth(R.id.imageFirst, 0.75F)
+        set.applyTo(this)
     }
 }
