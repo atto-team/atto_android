@@ -106,7 +106,10 @@ class LoginActivity : BaseActivity() {
                     SessionHelper.userPhone = phoneNumber.toString()
                     getIdToken(true).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            task.result?.token?.let { SessionHelper.storeAccessToken(it) }
+                            task.result?.token?.let {
+                                SessionHelper.storeAccessToken(it)
+                                checkAuth()
+                            }
                         } else {
                             // Handle error -> task.getException();
                         }
