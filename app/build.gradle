@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -26,12 +27,12 @@ android {
     applicationVariants.all {}
     productFlavors {
         dev {
-            manifestPlaceholders = [ appLabel: "아또 dev" ]
+            manifestPlaceholders = [appLabel: "아또 dev"]
             dimension "mode"
             applicationIdSuffix ".dev"
         }
         production {
-            manifestPlaceholders = [ appLabel: "아또" ]
+            manifestPlaceholders = [appLabel: "아또"]
             dimension "mode"
         }
     }
@@ -157,7 +158,6 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:17.1.0'
     implementation 'com.google.firebase:firebase-database:19.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
 
     //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
@@ -168,6 +168,5 @@ dependencies {
     //Google login
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-invites:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
