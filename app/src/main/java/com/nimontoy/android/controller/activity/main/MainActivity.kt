@@ -10,7 +10,7 @@ import com.nimontoy.android.adapter.AttoPagerAdapter
 import com.nimontoy.android.controller.activity.BaseActivity
 import com.nimontoy.android.controller.fragment.home.HomeFragment
 import com.nimontoy.android.controller.fragment.mypage.MypageFragment
-import com.nimontoy.android.controller.fragment.notification.NotificationFragment
+import com.nimontoy.android.controller.fragment.feed.FeedFragment
 import com.nimontoy.android.controller.fragment.shop.ShopFragment
 import com.nimontoy.android.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -88,7 +88,7 @@ class MainActivity : BaseActivity() {
         view_pager.adapter = AttoPagerAdapter(
             fmMgr, listOf(
                 HomeFragment.newInstance(),
-                NotificationFragment.newInstance(),
+                FeedFragment.newInstance(),
                 MypageFragment.newInstance(),
                 ShopFragment.newInstance()
             ), listOf(

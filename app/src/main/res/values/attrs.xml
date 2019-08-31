@@ -21,4 +21,23 @@
         <attr name="button_image_src" format="reference"/>
         <attr name="button_image_visibility" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="UserCellView">
+        <attr name="username_text" format="reference|string"/>
+        <attr name="date" foramt="reference|string"/>
+        <attr name="image_profile_src" format="reference|integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CardComponentCellView">
+        <attr name="mode" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ImageCellView"/>
+
+    <declare-styleable name="TextCellView" >
+        <attr name="text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ElementsCellView" />
+
 </resources>

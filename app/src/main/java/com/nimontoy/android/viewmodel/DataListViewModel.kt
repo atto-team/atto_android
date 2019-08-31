@@ -1,17 +1,17 @@
 package com.nimontoy.android.viewmodel
 
-import com.nimontoy.android.Variable
 import com.google.gson.JsonParser
+import com.nimontoy.android.Variable
 import com.nimontoy.android.mapper.DataMapper
 import com.nimontoy.android.model.Data
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by leekijung on 2019. 4. 21..
  */
 
 open class DataListViewModel : BaseViewModel() {
-    private var dataList: MutableList<Data> = ArrayList()
+    var dataList: MutableList<Data> = ArrayList()
     var dataListToAdd: Variable<MutableList<Data>> = Variable()
 
     open fun getDataList(startHandler: (() -> Unit)?,
