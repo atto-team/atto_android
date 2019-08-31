@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.nimontoy.android.R
 import com.nimontoy.android.adapter.DataRecyclerAdapter
 import com.nimontoy.android.controller.fragment.DataListFragment
-import com.nimontoy.android.viewmodel.FeedListViewModel
+import com.nimontoy.android.viewmodel.feed.FeedListViewModel
 
 class FeedFragment : DataListFragment() {
 
@@ -29,4 +29,10 @@ class FeedFragment : DataListFragment() {
         initData()
         return view
     }
+
+    override fun bindViews() {
+        super.bindViews()
+        // TODO 추가적인 UI 갱신이 필요할 경우 observable하게 구현할 것
+    }
+
 }
