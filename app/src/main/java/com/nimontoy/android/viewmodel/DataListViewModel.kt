@@ -23,24 +23,6 @@ open class DataListViewModel : BaseViewModel() {
         this addList dataList
     }
 
-    protected fun parseDataList(jsonString: String): List<Data> {
-        val dataList = ArrayList<Data>()
-        try {
-            val json = JsonParser().parse(jsonString).asJsonObject
-            if (json.get("data").isJsonArray) {
-                for (element in json.get("data").asJsonArray) {
-                    val jsonObject = element.asJsonObject
-                    dataList.add(DataMapper.map(jsonObject))
-                }
-            } else {
-                dataList.add(DataMapper.map(json.get("data").asJsonObject))
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return dataList
-    }
-
     protected infix fun add(Data: Data) {
         dataList.add(Data)
         changeData()
