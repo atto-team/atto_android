@@ -10,7 +10,7 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.nimontoy.android.Variable
-import com.nimontoy.android.controller.activity.login.LoginActivity
+import com.nimontoy.android.view.controller.activity.login.LoginActivity
 
 /**
  * Created by leesujung on 2019. 8. 14..

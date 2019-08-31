@@ -9,7 +9,7 @@ import com.kakao.usermgmt.callback.MeResponseCallback
 import com.kakao.usermgmt.response.model.UserProfile
 import com.kakao.util.exception.KakaoException
 import com.nimontoy.android.Variable
-import com.nimontoy.android.controller.activity.login.LoginActivity
+import com.nimontoy.android.view.controller.activity.login.LoginActivity
 
 /**
  * Created by leesujung on 2019. 8. 14..

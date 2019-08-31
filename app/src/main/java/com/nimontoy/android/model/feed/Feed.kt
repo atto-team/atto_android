@@ -1,13 +1,14 @@
 package com.nimontoy.android.model.feed
 
 import android.os.Parcelable
+import com.nimontoy.android.basic.Type
 import com.nimontoy.android.model.Data
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Feed (
     override var id : String,
-    override var type : String,
+    override var type : Type,
     override var scheme : String,
     var userName : String,
     var date : String,
