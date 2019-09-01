@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @SuppressLint("CheckResult")
-class FeedListViewModel : DataListViewModel() {
+class FeedViewModel : DataListViewModel() {
 
     override fun getDataList(
         startHandler: (() -> Unit)?,

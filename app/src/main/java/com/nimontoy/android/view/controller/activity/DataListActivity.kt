@@ -1,6 +1,7 @@
 package com.nimontoy.android.view.controller.activity
 
 import android.annotation.SuppressLint
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nimontoy.android.R
@@ -21,6 +22,7 @@ open class DataListActivity : BaseActivity() {
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
         recyclerView.adapter = dataRecyclerAdapter
         swipeRefreshLayout?.setColorSchemeResources(R.color.colorPrimary)
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
     open fun bindViews() {

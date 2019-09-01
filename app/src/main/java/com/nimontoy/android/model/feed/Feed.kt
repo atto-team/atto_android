@@ -1,6 +1,7 @@
 package com.nimontoy.android.model.feed
 
 import android.os.Parcelable
+import com.nimontoy.android.basic.Type
 import com.nimontoy.android.model.Data
 import kotlinx.android.parcel.Parcelize
 
