@@ -6,5 +6,9 @@ package com.nimontoy.android.basic
 
 enum class Type(var type: String) {
     EMPTY_CELL("empty.cell"),
-    FEED_CELL("feed.cell")
+    FEED_CELL("feed.cell"),
+    HEADER_CELL("header.cell"),
+    PROFILE_CELL("profile.cell"),
+    SPACE_CELL("space.cell"),
+    EVENT_CARD_CELL("event.card.cell")
 }

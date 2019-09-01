@@ -9,6 +9,7 @@ import com.nimontoy.android.viewmodel.cell.DataCellViewModel
  */
 
 class EmptyViewHolder(itemView: View) : DataViewHolder(itemView) {
+
     override fun reset() {}
 
     override fun bindData(data: Data, viewModel: DataCellViewModel) {}

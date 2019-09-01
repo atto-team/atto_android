@@ -33,38 +33,44 @@ class UrlImageView : AppCompatImageView {
     }
 
     fun render(url: String) {
-        Glide.with(AttoApplication.appContext)
+        AttoApplication.appContext?.let {
+            Glide.with(it)
                 .asBitmap()
                 .load(url)
                 .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .skipMemoryCache(false)
-                        .centerCrop().format(DecodeFormat.PREFER_ARGB_8888))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .skipMemoryCache(false)
+                    .centerCrop().format(DecodeFormat.PREFER_ARGB_8888))
                 .into(this)
+        }
     }
 
     fun renderWithCorner(url: String, corner: Int) {
-        Glide.with(AttoApplication.appContext)
+        AttoApplication.appContext?.let {
+            Glide.with(it)
                 .asBitmap()
                 .load(url)
                 .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .skipMemoryCache(false)
-                        .format(DecodeFormat.PREFER_ARGB_8888)
-                        .centerCrop()
-                        .transforms(CenterCrop(), RoundedCorners(corner)))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .skipMemoryCache(false)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .centerCrop()
+                    .transforms(CenterCrop(), RoundedCorners(corner)))
                 .into(this)
+        }
     }
 
     fun renderMemoryCache(url: String) {
-        Glide.with(AttoApplication.appContext)
+        AttoApplication.appContext?.let {
+            Glide.with(it)
                 .asBitmap()
                 .load(url)
                 .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .skipMemoryCache(true)
-                        .dontTransform().format(DecodeFormat.PREFER_ARGB_8888))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(true)
+                    .dontTransform().format(DecodeFormat.PREFER_ARGB_8888))
                 .into(this)
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

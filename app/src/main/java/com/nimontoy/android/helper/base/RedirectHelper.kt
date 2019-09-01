@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper
+package com.nimontoy.android.helper.base
 
 import android.app.Activity
 import android.content.Context
@@ -17,7 +17,12 @@ object RedirectHelper {
 
     fun goToActivity(activity: Activity, clz: KClass<*>, extraMap: Map<String, Any>) {
         val intent = Intent(activity.applicationContext, clz.java)
-        activity.startActivity(checkTypeAndPutIntent(intent, extraMap.entries))
+        activity.startActivity(
+            checkTypeAndPutIntent(
+                intent,
+                extraMap.entries
+            )
+        )
     }
 
     fun goToActivity(context: Context, intent: Intent) {
@@ -31,7 +36,10 @@ object RedirectHelper {
         }
         context.startActivity(
             if(extraMap.isNotEmpty())
-                checkTypeAndPutIntent(intent, extraMap.entries)
+                checkTypeAndPutIntent(
+                    intent,
+                    extraMap.entries
+                )
             else intent
         )
     }
@@ -65,7 +73,10 @@ object RedirectHelper {
                 intent.putExtra("isLogout", Code.LOGIN_SUCCESS.code)
             else
                 intent.putExtra("isLogout", Code.LOGOUT_SUCCESS.code)
-            goToActivity(activity.applicationContext, intent)
+            goToActivity(
+                activity.applicationContext,
+                intent
+            )
         }
         activity.finish()
     }

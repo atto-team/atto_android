@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.nimontoy.android.R
 import com.nimontoy.android.view.adapter.DataRecyclerAdapter
 import com.nimontoy.android.view.controller.fragment.DataListFragment
-import com.nimontoy.android.viewmodel.controller.feed.FeedListViewModel
+import com.nimontoy.android.viewmodel.controller.feed.FeedViewModel
 
 class FeedFragment : DataListFragment() {
 
@@ -20,7 +20,7 @@ class FeedFragment : DataListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_feed, container, false)
 
-        viewModel = FeedListViewModel()
+        viewModel = FeedViewModel()
 
         dataRecyclerAdapter = DataRecyclerAdapter(viewModel.dataList)
 
