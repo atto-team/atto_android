@@ -2,6 +2,7 @@ package com.nimontoy.android.mapper
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.nimontoy.android.basic.Type
 import com.nimontoy.android.helper.MinorHelper
 import com.nimontoy.android.model.Data
 
@@ -13,13 +14,14 @@ class DataMapper {
 
     companion object {
         private var gson: Gson? = null
-        private var type: String? = null
+        private var type: Type? = null
 
         fun map(json: JsonObject): Data {
             gson = MinorHelper.getGson()
-            type = json.get("type").asString
+            type = Type.valueOf(json.get("type").asString)
 
             when (type) {
+
             }
             return Data()
         }

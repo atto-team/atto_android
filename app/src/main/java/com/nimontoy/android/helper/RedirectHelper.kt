@@ -10,7 +10,7 @@ import java.util.ArrayList
 
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import com.nimontoy.android.basic.Code
-import com.nimontoy.android.controller.activity.main.MainActivity
+import com.nimontoy.android.view.controller.activity.main.MainActivity
 import kotlin.reflect.KClass
 
 object RedirectHelper {

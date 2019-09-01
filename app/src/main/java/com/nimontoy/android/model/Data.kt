@@ -3,6 +3,7 @@ package com.nimontoy.android.model
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
+import com.nimontoy.android.basic.Type
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
@@ -14,7 +15,7 @@ typealias DataHandler = ((Data) -> Unit)
 
 @Parcelize
 open class Data(open var id: String = "null",
-                open var type: String = "null",
+                open var type: Type = Type.EMPTY_CELL,
                 open var scheme: String = "null"
 ) : Parcelable {
 

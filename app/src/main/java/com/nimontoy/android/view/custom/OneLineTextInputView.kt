@@ -41,7 +41,7 @@ class OneLineTextInputView : RxRelativeLayout {
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.one_line_text_input_view, this, false) }
 
-    val textTitle by lazy<TextView> { view.findViewById(R.id.title_text) }
+    val titleText by lazy<TextView> { view.findViewById(R.id.title_text) }
     val optionButton by lazy<Button> { view.findViewById(R.id.option_button) }
     val input by lazy<EditText> { view.findViewById(R.id.input) }
     val textButton by lazy<Button> { view.findViewById(R.id.button_text) }
@@ -90,8 +90,8 @@ class OneLineTextInputView : RxRelativeLayout {
 
     private fun setTypeArray(typedArray: TypedArray) {
         var visibility = typedArray.getString(R.styleable.OneLineTextInputView_title_visibility)
-        setVisible(textTitle, visibility)
-        textTitle.text = typedArray.getString(R.styleable.OneLineTextInputView_title_text)
+        setVisible(titleText, visibility)
+        titleText.text = typedArray.getString(R.styleable.OneLineTextInputView_title_text)
 
         visibility = typedArray.getString(R.styleable.OneLineTextInputView_option_visibility)
         setVisible(optionButton, visibility)
@@ -126,11 +126,11 @@ class OneLineTextInputView : RxRelativeLayout {
     }
 
     fun setTitleText(titleText: String) {
-        textTitle.text = titleText
+        this.titleText.text = titleText
     }
 
     fun setTitleText(resId: Int) {
-        textTitle.setText(resId)
+        titleText.setText(resId)
     }
 
     fun setOptionText(optionText: String) {

@@ -1,10 +1,8 @@
 package com.nimontoy.android.mapper
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.nimontoy.android.R
-import com.nimontoy.android.adapter.viewholder.*
+import com.nimontoy.android.view.adapter.viewholder.*
 
 /**
  * Created by leekijung on 2019. 4. 21..

@@ -7,7 +7,7 @@ import com.nimontoy.android.helper.MinorHelper.toast
 import com.nimontoy.android.util.UnicodeUtil
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.nimontoy.android.BuildConfig
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -150,93 +150,93 @@ open class NetworkHelper {
     interface NoErrorInterceptService {
         @FormUrlEncoded
         @POST("/{resources}")
-        fun postResources(@Path("resources") resource: String, @FieldMap parameters: HashMap<String, Any>): Observable<String>
+        fun postResources(@Path("resources") resource: String, @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @POST("/{resources}/{target}")
-        fun postResourcesTarget(@Path("resources") resource: String, @Path("target") target: String): Observable<Response<Void>>
+        fun postResourcesTarget(@Path("resources") resource: String, @Path("target") target: String): Flowable<Response<Void>>
 
         @FormUrlEncoded
         @POST("/{resources}/{target}")
-        fun postResourcesTarget(@Path("resources") resource: String, @Path("target") target: String, @FieldMap parameters: HashMap<String, Any>): Observable<String>
+        fun postResourcesTarget(@Path("resources") resource: String, @Path("target") target: String, @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @FormUrlEncoded
         @POST("/{resources}/{target}/{action}")
-        fun postResourcesTargetAction(@Path("resources") resource: String, @Path("target") target: String, @Path("action") action: String, @FieldMap parameters: HashMap<String, Any>): Observable<String>
+        fun postResourcesTargetAction(@Path("resources") resource: String, @Path("target") target: String, @Path("action") action: String, @FieldMap parameters: HashMap<String, Any>): Flowable<String>
     }
 
     interface ApiService {
         @GET
-        fun getUrl(@Url url: String): Observable<String>
+        fun getUrl(@Url url: String): Flowable<String>
 
         @GET("/{resources}")
         fun getResources(
-            @Path("resources") resource: String): Observable<String>
+            @Path("resources") resource: String): Flowable<String>
 
         @GET("/{resources}")
         fun getResources(
             @Path("resources") resource: String,
-            @QueryMap params: Map<String, Any>): Observable<String>
+            @QueryMap params: Map<String, Any>): Flowable<String>
 
         @GET("/{resources}/{target}")
         fun getResourcesTarget(
             @Path("resources") resource: String,
-            @Path("target") target: String): Observable<String>
+            @Path("target") target: String): Flowable<String>
 
         @GET("/{resources}/{target}")
         fun getResourcesTarget(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @QueryMap params: Map<String, Any>): Observable<String>
+            @QueryMap params: Map<String, Any>): Flowable<String>
 
         @GET("/{resources}/{target}/{action}")
         fun getResourcesTargetAction(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @Path("action") action: String): Observable<String>
+            @Path("action") action: String): Flowable<String>
 
         @GET("/{resources}/{target}/{action}")
         fun getResourcesTargetAction(
             @Path("resources") resource: String,
             @Path("target") target: String,
             @Path("action") action: String,
-            @QueryMap params: Map<String, Any>): Observable<String>
+            @QueryMap params: Map<String, Any>): Flowable<String>
 
         @POST
-        fun postUrl(@Url url: String): Observable<String>
+        fun postUrl(@Url url: String): Flowable<String>
 
         @POST("/{resources}")
         fun postResources(
-            @Path("resources") resource: String): Observable<String>
+            @Path("resources") resource: String): Flowable<String>
 
         @FormUrlEncoded
         @POST("/{resources}")
         fun postResources(
             @Path("resources") resource: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @POST("/{resources}/{target}")
         fun postResourcesTarget(
             @Path("resources") resource: String,
-            @Path("target") target: String): Observable<Void>
+            @Path("target") target: String): Flowable<Void>
 
         @FormUrlEncoded
         @POST("/{resources}/{target}")
         fun postResourcesTarget(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @POST("/{resources}/{target}/{action}")
         fun postResourcesTargetAction(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @Path("action") action: String): Observable<String>
+            @Path("action") action: String): Flowable<String>
 
         @POST("/{resources}/{target}/{action}")
         fun postResourcesTargetActionNoResponse(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @Path("action") action: String): Observable<Response<Void>>
+            @Path("action") action: String): Flowable<Response<Void>>
 
         @FormUrlEncoded
         @POST("/{resources}/{target}/{action}")
@@ -244,23 +244,23 @@ open class NetworkHelper {
             @Path("resources") resource: String,
             @Path("target") target: String,
             @Path("action") action: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @PATCH
-        fun patchUrl(@Url url: String): Observable<String>
+        fun patchUrl(@Url url: String): Flowable<String>
 
         @FormUrlEncoded
         @PATCH("/{resources}")
         fun patchResources(
             @Path("resources") resource: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @FormUrlEncoded
         @PATCH("/{resources}/{target}")
         fun patchResourcesTarget(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @FormUrlEncoded
         @PATCH("/{resources}/{target}/{action}")
@@ -268,44 +268,44 @@ open class NetworkHelper {
             @Path("resources") resource: String,
             @Path("target") target: String,
             @Path("action") action: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @DELETE
-        fun deleteUrl(@Url url: String): Observable<String>
+        fun deleteUrl(@Url url: String): Flowable<String>
 
         @DELETE
-        fun deleteUrlNoResponse(@Url url: String): Observable<Response<Void>>
+        fun deleteUrlNoResponse(@Url url: String): Flowable<Response<Void>>
 
         @DELETE("/{resources}")
-        fun deleteResources(@Path("resources") resource: String): Observable<String>
+        fun deleteResources(@Path("resources") resource: String): Flowable<String>
 
         @FormUrlEncoded
         @HTTP(method = "DELETE", path = "/{resources}", hasBody = true)
         fun deleteResources(
             @Path("resources") resource: String,
-            @FieldMap parameters: HashMap<String, Any>): Observable<String>
+            @FieldMap parameters: HashMap<String, Any>): Flowable<String>
 
         @DELETE("/{resources}/{target}")
         fun deleteResourcesTarget(
             @Path("resources") resource: String,
-            @Path("target") target: String): Observable<String>
+            @Path("target") target: String): Flowable<String>
 
         @DELETE("/{resources}/{target}")
         fun deleteResourcesTargetNoResponse(
             @Path("resources") resource: String,
-            @Path("target") target: String): Observable<Response<Void>>
+            @Path("target") target: String): Flowable<Response<Void>>
 
         @DELETE("/{resources}/{target}/{action}")
         fun deleteResourcesTargetAction(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @Path("action") action: String): Observable<String>
+            @Path("action") action: String): Flowable<String>
 
         @DELETE("/{resources}/{target}/{action}")
         fun deleteResourcesTargetActionNoResponse(
             @Path("resources") resource: String,
             @Path("target") target: String,
-            @Path("action") action: String): Observable<Response<Void>>
+            @Path("action") action: String): Flowable<Response<Void>>
 
     }
 }

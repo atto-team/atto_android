@@ -5,5 +5,6 @@ package com.nimontoy.android.basic
  */
 
 enum class Type(var type: String) {
-
+    EMPTY_CELL("empty.cell"),
+    FEED_CELL("feed.cell")
 }

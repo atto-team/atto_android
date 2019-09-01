@@ -11,7 +11,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.nimontoy.android.R
 import com.nimontoy.android.Variable
 import com.nimontoy.android.basic.Code
-import com.nimontoy.android.controller.activity.login.LoginActivity
+import com.nimontoy.android.view.controller.activity.login.LoginActivity
 
 class GoogleLoginHelper(val context: LoginActivity, val userVariable: Variable<FirebaseUser>) {
     private val TAG = "GoogleLoginHelper"
