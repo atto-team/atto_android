@@ -10,6 +10,7 @@ import com.nimontoy.android.view.custom.ImageCellView
 import com.nimontoy.android.view.custom.TextCellView
 import com.nimontoy.android.view.custom.UserCellView
 import com.nimontoy.android.viewmodel.cell.DataCellViewModel
+import com.nimontoy.android.viewmodel.cell.feed.FeedCellViewModel
 
 class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
 
@@ -26,7 +27,7 @@ class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
 
     override fun bindData(data : Data, viewModel: DataCellViewModel) {
         super.bindData(data, viewModel)
-        if (data is Feed) {
+        if (data is Feed && viewModel is FeedCellViewModel) {
             val feed = data
             userCellView.setUserNameText(feed.userName)
             userCellView.setDateTimeText("${feed.date} | ${feed.time}")

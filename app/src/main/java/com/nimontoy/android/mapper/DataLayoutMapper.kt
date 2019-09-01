@@ -12,7 +12,7 @@ object DataLayoutMapper {
 
     fun map(data: Data): Int {
         return when (data.type) {
-            Type.FEED_CELL -> R.layout.viewholder_empty
+            Type.FEED_CELL -> R.layout.viewholder_feed
             else -> R.layout.viewholder_empty
         }
     }
