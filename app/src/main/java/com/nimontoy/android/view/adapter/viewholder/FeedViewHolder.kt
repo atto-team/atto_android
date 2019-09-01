@@ -31,7 +31,7 @@ class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
             userCellView.setUserNameText(feed.userName)
             userCellView.setDateTimeText("${feed.date} | ${feed.time}")
             textCellView.setTextCell(feed.contents)
-            imageCellView.setImage(feed.images)
+            feed.images?.let { imageCellView.setImage(it) }
         }
     }
 

@@ -8,8 +8,8 @@ import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.google.gson.JsonParser
 import com.nimontoy.android.AttoApplication
-import com.nimontoy.android.helper.PreferencesHelper
-import com.nimontoy.android.helper.RedirectHelper
+import com.nimontoy.android.helper.base.PreferencesHelper
+import com.nimontoy.android.helper.base.RedirectHelper
 import java.util.HashMap
 import io.reactivex.Observable
 
@@ -38,7 +38,7 @@ class SessionHelper {
 
         @SuppressLint("HardwareIds")
         private val ANDROID_ID = Settings.Secure.getString(
-            AttoApplication.appContext.contentResolver,
+            AttoApplication.appContext?.contentResolver,
             Settings.Secure.ANDROID_ID
         )
 

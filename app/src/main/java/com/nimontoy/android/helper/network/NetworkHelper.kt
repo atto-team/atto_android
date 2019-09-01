@@ -2,8 +2,8 @@ package com.nimontoy.android.helper.network
 
 import android.annotation.SuppressLint
 import com.nimontoy.android.basic.BaseUrl
-import com.nimontoy.android.helper.MinorHelper
-import com.nimontoy.android.helper.MinorHelper.toast
+import com.nimontoy.android.helper.base.MinorHelper
+import com.nimontoy.android.helper.base.MinorHelper.toast
 import com.nimontoy.android.util.UnicodeUtil
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.nimontoy.android.BuildConfig

@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper
+package com.nimontoy.android.helper.base
 
 import android.os.Build
 import android.util.TypedValue
@@ -12,8 +12,8 @@ import com.nimontoy.android.AttoApplication
 
 object ViewUtil {
     fun dpToPixel(dp: Int): Int {
-        val resources = AttoApplication.appContext.resources
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics).toInt()
+        val resources = AttoApplication.appContext?.resources
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources?.displayMetrics).toInt()
     }
 
     fun clearLightStatusBar(view: View) {

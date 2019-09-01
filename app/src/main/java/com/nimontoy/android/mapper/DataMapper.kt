@@ -3,8 +3,9 @@ package com.nimontoy.android.mapper
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.nimontoy.android.basic.Type
-import com.nimontoy.android.helper.MinorHelper
+import com.nimontoy.android.helper.base.MinorHelper
 import com.nimontoy.android.model.Data
+import com.nimontoy.android.model.feed.Feed
 
 /**
  * Created by leekijung on 2019. 4. 21..
@@ -20,10 +21,10 @@ class DataMapper {
             gson = MinorHelper.getGson()
             type = Type.valueOf(json.get("type").asString)
 
-            when (type) {
-
+            return when (type) {
+                Type.FEED_CELL -> Feed()
+                else -> Data()
             }
-            return Data()
         }
 
         private fun convertJsonType(json: JsonObject, clazz: Class<*>): Data {

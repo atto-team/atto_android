@@ -1,6 +1,6 @@
 package com.nimontoy.android.helper.network
 
-import com.nimontoy.android.helper.MinorHelper
+import com.nimontoy.android.helper.base.MinorHelper
 import com.nimontoy.android.model.network.NetworkError
 import com.nimontoy.android.util.UnicodeUtil
 
