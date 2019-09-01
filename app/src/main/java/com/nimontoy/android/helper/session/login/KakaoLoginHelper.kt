@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper.login
+package com.nimontoy.android.helper.session.login
 
 import android.util.Log
 import com.kakao.auth.ErrorCode
@@ -15,7 +15,7 @@ import com.nimontoy.android.view.controller.activity.login.LoginActivity
  * Created by leesujung on 2019. 8. 14..
  */
 typealias KakaoUser = UserProfile
-open class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variable<KakaoUser>) : ISessionCallback {
+class KakaoLoginHelper(val context: LoginActivity, var userVariable: Variable<KakaoUser>) : ISessionCallback {
 
     val TAG = "KakaoLoginHelper"
 

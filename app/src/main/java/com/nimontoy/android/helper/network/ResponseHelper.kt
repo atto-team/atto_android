@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper
+package com.nimontoy.android.helper.network
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nimontoy.android.R
 import com.nimontoy.android.view.adapter.DataRecyclerAdapter
-import com.nimontoy.android.helper.DataBindHelper
+import com.nimontoy.android.helper.base.DataBindHelper
 import com.nimontoy.android.viewmodel.controller.DataListViewModel
 
 open class DataListFragment : BaseFragment() {

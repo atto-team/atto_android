@@ -14,12 +14,12 @@ import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.nimontoy.android.Variable
 import com.nimontoy.android.basic.Code
-import com.nimontoy.android.helper.RedirectHelper.goToMain
-import com.nimontoy.android.helper.login.FacebookLoginHelper
+import com.nimontoy.android.helper.base.RedirectHelper.goToMain
+import com.nimontoy.android.helper.session.login.FacebookLoginHelper
 
-import com.nimontoy.android.helper.login.GoogleLoginHelper
-import com.nimontoy.android.helper.login.KakaoLoginHelper
-import com.nimontoy.android.helper.login.KakaoUser
+import com.nimontoy.android.helper.session.login.GoogleLoginHelper
+import com.nimontoy.android.helper.session.login.KakaoLoginHelper
+import com.nimontoy.android.helper.session.login.KakaoUser
 import com.nimontoy.android.helper.session.SessionHelper
 import kotlinx.android.synthetic.main.activity_login.*
 import android.content.pm.PackageManager

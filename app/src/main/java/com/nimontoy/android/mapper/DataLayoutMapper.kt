@@ -1,6 +1,7 @@
 package com.nimontoy.android.mapper
 
 import com.nimontoy.android.R
+import com.nimontoy.android.basic.Type
 import com.nimontoy.android.model.Data
 
 /**
@@ -10,21 +11,9 @@ import com.nimontoy.android.model.Data
 object DataLayoutMapper {
 
     fun map(data: Data): Int {
-        if (data.type == "null" || data.type.isEmpty()) return R.layout.viewholder_empty
-        when (data.type) {
-            "header_cell" -> {
-                return R.layout.viewholder_header
-            }
-            "profile_cell" -> {
-                return R.layout.viewholder_profile
-            }
-            "space_cell" -> {
-                return R.layout.viewholder_space
-            }
-            "event_card_cell" ->{
-                return R.layout.viewholder_event_card
-            }
+        return when (data.type) {
+            Type.FEED_CELL -> R.layout.viewholder_feed
+            else -> R.layout.viewholder_empty
         }
-        return R.layout.viewholder_empty
     }
 }

@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper
+package com.nimontoy.android.helper.base
 
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -25,7 +25,10 @@ object PreferencesHelper {
     }
 
     internal fun store(key: String, value: Boolean) {
-        store(key, java.lang.Boolean.toString(value))
+        store(
+            key,
+            java.lang.Boolean.toString(value)
+        )
     }
 
     internal fun store(key: String, value: Int) {
@@ -33,7 +36,10 @@ object PreferencesHelper {
     }
 
     internal fun store(key: String, value: Float) {
-        store(key, java.lang.Float.toString(value))
+        store(
+            key,
+            java.lang.Float.toString(value)
+        )
     }
 
     internal fun exist(key: String): Boolean {

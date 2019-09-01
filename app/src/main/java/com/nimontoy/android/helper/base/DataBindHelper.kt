@@ -1,4 +1,4 @@
-package com.nimontoy.android.helper
+package com.nimontoy.android.helper.base
 
 import android.content.Context
 import com.nimontoy.android.model.Data
@@ -24,7 +24,8 @@ class DataBindHelper {
         private var instance: DataBindHelper? = null
 
         fun getInstance(): DataBindHelper {
-            if (instance == null) instance = DataBindHelper()
+            if (instance == null) instance =
+                DataBindHelper()
             return instance as DataBindHelper
         }
     }
