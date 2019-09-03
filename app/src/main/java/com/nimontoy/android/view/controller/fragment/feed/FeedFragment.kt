@@ -30,9 +30,4 @@ class FeedFragment : DataListFragment() {
         return view
     }
 
-    override fun bindViews() {
-        super.bindViews()
-        // TODO 추가적인 UI 갱신이 필요할 경우 observable하게 구현할 것
-    }
-
 }
