@@ -3,6 +3,7 @@ package com.nimontoy.android.view.adapter.viewholder
 import android.util.Log
 import android.view.View
 import com.nimontoy.android.R
+import com.nimontoy.android.helper.base.ViewUtil
 import com.nimontoy.android.model.Data
 import com.nimontoy.android.model.feed.Feed
 import com.nimontoy.android.view.custom.ElementsCellView
@@ -14,12 +15,12 @@ import com.nimontoy.android.viewmodel.cell.feed.FeedCellViewModel
 
 class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
 
+    private val TAG = "FeedViewHolder"
+
     private val userCellView by lazy { itemView.findViewById<UserCellView>(R.id.user_cell_view) }
     private val textCellView by lazy { itemView.findViewById<TextCellView>(R.id.text_cell_view) }
     private val imageCellView by lazy { itemView.findViewById<ImageCellView>(R.id.image_cell_view) }
     private val elementsCellView by lazy { itemView.findViewById<ElementsCellView>(R.id.elements_cell_view) }
-
-    private val TAG = "FeedViewHolder"
 
     override fun reset() {
         // TODO 매번 리싸이클 시 뷰 초기화 부탁
@@ -32,7 +33,16 @@ class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
             userCellView.setUserNameText(feed.userName)
             userCellView.setDateTimeText("${feed.date} | ${feed.time}")
             textCellView.setTextCell(feed.contents)
-            feed.images?.let { imageCellView.setImage(it) }
+            feed.images?.let {
+                imageCellView.layoutParams = imageCellView.layoutParams.apply {
+                    height = if(it.size > 2) {
+                        ViewUtil.dpToPixel(240)
+                    } else {
+                        ViewUtil.dpToPixel(180)
+                    }
+                }
+                imageCellView.setImages(it)
+            }
         }
     }
 
