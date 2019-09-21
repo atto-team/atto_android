@@ -47,7 +47,7 @@ class TextCellView : ConstraintLayout {
         typedArray.recycle()
     }
 
-    fun setTextCell (text : String) {
-        textCell.text = text
+    fun setTextCell (text : String?) {
+        textCell.text = text ?: "null"
     }
 }

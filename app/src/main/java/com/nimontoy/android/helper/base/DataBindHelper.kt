@@ -11,8 +11,8 @@ import com.nimontoy.android.viewmodel.BaseViewModel
 class DataBindHelper {
 
     fun bindList(list: List<Data>, context: Context, viewModel: BaseViewModel) {
-        for (data in list) {
-            bindData(data, context, viewModel)
+        list.forEach {
+            bindData(it, context, viewModel)
         }
     }
 

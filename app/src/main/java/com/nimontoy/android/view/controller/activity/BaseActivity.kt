@@ -24,7 +24,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun finish() {
-        super.finish()
+        super.finish() 
         setupEndWindowAnimator()
     }
 

@@ -3,6 +3,7 @@ package com.nimontoy.android.view.adapter.viewholder
 import android.util.Log
 import android.view.View
 import com.nimontoy.android.R
+import com.nimontoy.android.helper.base.ViewUtil
 import com.nimontoy.android.model.Data
 import com.nimontoy.android.model.feed.Feed
 import com.nimontoy.android.view.custom.ElementsCellView
@@ -32,7 +33,16 @@ class FeedViewHolder(itemView : View) : DataViewHolder(itemView) {
             userCellView.setUserNameText(feed.userName)
             userCellView.setDateTimeText("${feed.date} | ${feed.time}")
             textCellView.setTextCell(feed.contents)
-            feed.images?.let { imageCellView.setImage(it) }
+            feed.images?.let {
+                imageCellView.layoutParams = imageCellView.layoutParams.apply {
+                    height = if(it.size > 2) {
+                        ViewUtil.dpToPixel(240)
+                    } else {
+                        ViewUtil.dpToPixel(180)
+                    }
+                }
+                imageCellView.setImages(it)
+            }
         }
     }
 

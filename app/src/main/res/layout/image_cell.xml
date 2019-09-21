@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/feed_cell_constraint"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/imageFirst"
+    <com.nimontoy.android.view.custom.UrlImageView
+        android:id="@+id/first_image"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageSecond"
+        app:layout_constraintDimensionRatio="w, 1:1"
+        app:layout_constraintEnd_toStartOf="@id/second_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kakaoaccount_icon"/>
+        android:background="@color/colorAccent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHeight_percent="1"/>
 
-    <ImageView
-        android:id="@+id/imageSecond"
+    <com.nimontoy.android.view.custom.UrlImageView
+        android:id="@+id/second_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/third_image"
+        app:layout_constraintDimensionRatio="w, 1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/first_image"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageFirst"
-        app:layout_constraintBottom_toTopOf="@id/imageThird"
-        app:srcCompat="@drawable/account" />
+        app:layout_constraintHeight_percent="0.5"
+        android:background="@color/colorClearBlue" />
 
-    <ImageView
-        android:id="@+id/imageThird"
+    <com.nimontoy.android.view.custom.UrlImageView
+        android:id="@+id/third_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageFirst"
-        app:layout_constraintTop_toBottomOf="@+id/imageSecond"
-        app:srcCompat="@drawable/googleg_standard_color_18" />
+        app:layout_constraintDimensionRatio="w, 1:1"
+        app:layout_constraintEnd_toEndOf="@id/second_image"
+        app:layout_constraintStart_toStartOf="@id/second_image"
+        app:layout_constraintTop_toBottomOf="@id/second_image"
+        app:layout_constraintHeight_percent="0.5" />
 
     <TextView
-        android:id="@+id/textExtra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="20sp"
+        android:id="@+id/extra_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#55000000"
+        android:gravity="center|center_horizontal"
+        android:text="+4"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageFirst"
-        app:layout_constraintTop_toBottomOf="@+id/imageSecond" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/third_image"
+        app:layout_constraintEnd_toEndOf="@id/third_image"
+        app:layout_constraintStart_toStartOf="@id/third_image"
+        app:layout_constraintTop_toTopOf="@+id/third_image"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
