@@ -6,4 +6,5 @@ package com.nimontoy.android.model
 
 data class ResponseData(
     val data: Data = Data(),
-    val dataList: MutableList<Data> = mutableListOf())
+    val dataList: MutableList<Data> = mutableListOf()
+)
