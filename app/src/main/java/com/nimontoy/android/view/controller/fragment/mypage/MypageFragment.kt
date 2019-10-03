@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nimontoy.android.R
-import com.nimontoy.android.basic.Type
-import com.nimontoy.android.model.Data
 import com.nimontoy.android.view.adapter.DataRecyclerAdapter
 import com.nimontoy.android.view.controller.fragment.DataListFragment
-import com.nimontoy.android.viewmodel.controller.mypage.MyPageViewModel
+import com.nimontoy.android.viewmodel.controller.main.mypage.MyPageViewModel
 
 class MypageFragment : DataListFragment() {
 

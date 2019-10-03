@@ -16,10 +16,10 @@ class ImageCellView : ConstraintLayout {
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.image_cell, this, false) }
 
-    val firstIamge by lazy<UrlImageView> { findViewById(R.id.first_image) }
-    val secondImage by lazy<UrlImageView> { findViewById(R.id.second_image) }
-    val thirdImage by lazy<UrlImageView> { findViewById(R.id.third_image) }
-    val extraText by lazy<TextView> { findViewById(R.id.extra_text) }
+    private val firstImage by lazy<UrlImageView> { findViewById(R.id.first_image) }
+    private val secondImage by lazy<UrlImageView> { findViewById(R.id.second_image) }
+    private val thirdImage by lazy<UrlImageView> { findViewById(R.id.third_image) }
+    private val extraText by lazy<TextView> { findViewById(R.id.extra_text) }
 
     constructor(context: Context) : super(context)
 
@@ -55,21 +55,21 @@ class ImageCellView : ConstraintLayout {
         val constraintSet = ConstraintSet()
         constraintSet.clone(feed_cell_constraint)
 
-        firstIamge.visibility = View.GONE
+        firstImage.visibility = View.GONE
         secondImage.visibility = View.GONE
         thirdImage.visibility = View.GONE
         extraText.visibility = View.GONE
         when (imageList.size) {
             0 -> { }
             1 -> {
-                firstIamge.layoutParams = (firstIamge.layoutParams as LayoutParams).apply {
+                firstImage.layoutParams = (firstImage.layoutParams as LayoutParams).apply {
                     dimensionRatio = "2:1"
                 }
                 setImageFirst(imageList[0])
-                firstIamge.visibility = View.VISIBLE
+                firstImage.visibility = View.VISIBLE
             }
             2 -> {
-                firstIamge.layoutParams = (firstIamge.layoutParams as LayoutParams).apply {
+                firstImage.layoutParams = (firstImage.layoutParams as LayoutParams).apply {
                     dimensionRatio = "1:1"
                 }
                 secondImage.layoutParams = (secondImage.layoutParams as LayoutParams).apply {
@@ -77,7 +77,7 @@ class ImageCellView : ConstraintLayout {
                 }
                 setImageFirst(imageList[0])
                 setImageSecond(imageList[1])
-                firstIamge.visibility = View.VISIBLE
+                firstImage.visibility = View.VISIBLE
                 secondImage.visibility = View.VISIBLE
             }
             3 -> {
@@ -87,7 +87,7 @@ class ImageCellView : ConstraintLayout {
                 setImageSecond(imageList[1])
                 setImageThird(imageList[2])
 
-                firstIamge.visibility = View.VISIBLE
+                firstImage.visibility = View.VISIBLE
                 secondImage.visibility = View.VISIBLE
                 thirdImage.visibility = View.VISIBLE
             }
@@ -99,7 +99,7 @@ class ImageCellView : ConstraintLayout {
                 setImageThird(imageList[2])
                 setTextExtra('+' + (imageList.size - 3).toString())
 
-                firstIamge.visibility = View.VISIBLE
+                firstImage.visibility = View.VISIBLE
                 secondImage.visibility = View.VISIBLE
                 thirdImage.visibility = View.VISIBLE
                 extraText.visibility = View.VISIBLE
@@ -107,19 +107,19 @@ class ImageCellView : ConstraintLayout {
         }
     }
 
-    fun setImageFirst(imageUrl : String?) {
-        imageUrl?.let { firstIamge.render(it) }
+    private fun setImageFirst(imageUrl : String?) {
+        imageUrl?.let { firstImage.render(it) }
     }
 
-    fun setImageSecond(imageUrl : String?) {
+    private fun setImageSecond(imageUrl : String?) {
         imageUrl?.let { secondImage.render(it) }
     }
 
-    fun setImageThird(imageUrl : String?) {
+    private fun setImageThird(imageUrl : String?) {
         imageUrl?.let { thirdImage.render(it) }
     }
 
-    fun setTextExtra(text : String) {
+    private fun setTextExtra(text : String) {
         extraText.text = text
     }
 }

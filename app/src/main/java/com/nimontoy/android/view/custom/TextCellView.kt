@@ -13,7 +13,7 @@ class TextCellView : ConstraintLayout {
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.text_cell, this, false) }
 
-    val textCell by lazy<TextView> { findViewById(R.id.text_cell) }
+    private val textCell by lazy<TextView> { findViewById(R.id.text_cell) }
 
     constructor(context: Context) : super(context)
 

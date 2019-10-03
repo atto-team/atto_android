@@ -1,10 +1,10 @@
-package com.nimontoy.android.viewmodel.controller.mypage
+package com.nimontoy.android.viewmodel.controller.main.shop
 
 import com.nimontoy.android.basic.Type
 import com.nimontoy.android.model.Data
 import com.nimontoy.android.viewmodel.controller.DataListViewModel
 
-class MyPageViewModel : DataListViewModel() {
+class ShopViewModel : DataListViewModel() {
 
     // TODO 테스트 코드이므로 반드시 지울 것..
     open class testUserData(override var id: String = "null",
