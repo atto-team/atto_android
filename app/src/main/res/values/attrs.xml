@@ -28,6 +28,32 @@
         <attr name="image_profile_src" format="reference|integer"/>
     </declare-styleable>
 
+    <declare-styleable name="EventCardCellView">
+        <attr name="event_text" format="reference|string"/>
+        <attr name="arrow_button_visibility" foramt="string"/>
+        <attr name="more_button_visibility" foramt="string"/>
+    </declare-styleable>
+
+    <!--My Page-->
+    <declare-styleable name="ProfileCellView">
+        <attr name="profile_image" format="reference|string"/>
+        <attr name="follow_text" foramt="reference|string"/>
+        <attr name="follower_text" foramt="reference|string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ToysCardCellView">
+        <attr name="toy_image" format="reference|string"/>
+        <attr name="toy_text" foramt="reference|string"/>
+        <attr name="effect_visibility" foramt="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="IntroCellView">
+        <attr name="intro_text" format="reference|string"/>
+        <attr name="number_text" foramt="reference|string"/>
+        <attr name="new_badge_visibility" foramt="string"/>
+    </declare-styleable>
+    <!--My Page-->
+
     <declare-styleable name="CardComponentCellView">
         <attr name="mode" format="string"/>
     </declare-styleable>

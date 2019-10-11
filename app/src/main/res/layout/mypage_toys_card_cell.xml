@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/toy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Collection_1"
+            android:textColor="@color/colorBlack"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/toy_card"
+            app:layout_constraintStart_toStartOf="@id/toy_card"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <com.nimontoy.android.view.custom.UrlImageView
+            android:id="@+id/toy_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toy_text"
+            app:srcCompat="@drawable/mypage_mytoys" />
+
+    <com.nimontoy.android.view.custom.UrlImageView
+            android:id="@+id/effect"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/toy_card"
+            app:layout_constraintEnd_toEndOf="@+id/toy_card"
+            app:layout_constraintStart_toStartOf="@+id/toy_card"
+            app:layout_constraintTop_toTopOf="@id/toy_card"
+            app:srcCompat="@drawable/ic_toy_card_effect" />
+</androidx.constraintlayout.widget.ConstraintLayout>

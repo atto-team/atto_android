@@ -9,6 +9,8 @@ enum class Type(var type: String) {
     FEED_CELL("feed.cell"),
     HEADER_CELL("header.cell"),
     PROFILE_CELL("profile.cell"),
+    INTRO_CELL("intro.cell"),
     SPACE_CELL("space.cell"),
-    EVENT_CARD_CELL("event.card.cell")
+    EVENT_CARD_CELL("event.card.cell"),
+    MY_TOYS_CELL("my.toys.cell")
 }

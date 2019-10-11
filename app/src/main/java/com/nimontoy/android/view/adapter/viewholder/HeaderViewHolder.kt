@@ -1,0 +1,30 @@
+package com.nimontoy.android.view.adapter.viewholder
+
+import android.view.View
+import android.widget.TextView
+import com.nimontoy.android.R
+import com.nimontoy.android.model.Data
+import com.nimontoy.android.model.mypage.Profile
+import com.nimontoy.android.viewmodel.cell.DataCellViewModel
+
+/**
+ * Created by leesujung on 2019. 8. 18..
+ */
+class HeaderViewHolder (itemView: View) : DataViewHolder(itemView) {
+    private val headerText by lazy { itemView.findViewById<TextView>(R.id.header_text) }
+
+    override fun reset() {
+    }
+
+    override fun bindData(data: Data, viewModel: DataCellViewModel) {
+        super.bindData(data, viewModel)
+        if (data is Profile) {
+            val user = data
+            headerText.setText("Hello, "+user.userName+"!")
+        }
+    }
+
+    override fun bindViews(data: Data) {
+    }
+
+}

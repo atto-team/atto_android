@@ -16,9 +16,11 @@ object DataViewHolderMapper {
         val itemView = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return when (layoutId) {
             R.layout.viewholder_feed -> FeedViewHolder(itemView)
-            R.layout.viewholder_header -> UserNameViewHolder(itemView)
+            R.layout.viewholder_header -> HeaderViewHolder(itemView)
             R.layout.viewholder_profile ->ProfileViewHolder(itemView)
             R.layout.viewholder_event_card -> EventCardViewHolder(itemView)
+            R.layout.viewholder_mytoys -> MyToysViewHolder(itemView)
+            R.layout.viewholder_intro -> IntroViewHolder(itemView)
             else -> EmptyViewHolder(itemView)
         }
     }

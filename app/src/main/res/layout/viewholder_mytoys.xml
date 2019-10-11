@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/empty_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:lineSpacingExtra="9sp"
+            android:text="There's no collection yet"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <com.nimontoy.android.view.custom.ToysCardCellView
+            android:id="@+id/toy1"
+            app:toy_text="Collection_1"
+            app:toy_image="@drawable/mypage_mytoys"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w, 1:1"
+            app:layout_constraintEnd_toStartOf="@+id/toy2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <com.nimontoy.android.view.custom.ToysCardCellView
+            android:id="@+id/toy2"
+            app:toy_text="Collection_2"
+            app:toy_image="@drawable/mypage_mytoys"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="9dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toy1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/toy1"
+            app:layout_constraintTop_toTopOf="@+id/toy1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
