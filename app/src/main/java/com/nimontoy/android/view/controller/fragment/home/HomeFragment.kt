@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.nimontoy.android.R
 import com.nimontoy.android.view.adapter.DataRecyclerAdapter
 import com.nimontoy.android.view.controller.fragment.DataListFragment
-import com.nimontoy.android.viewmodel.controller.home.HomeViewModel
+import com.nimontoy.android.viewmodel.controller.main.home.HomeViewModel
 
 class HomeFragment : DataListFragment() {
 
