@@ -11,7 +11,7 @@ import com.nimontoy.android.view.controller.fragment.home.HomeFragment
 import com.nimontoy.android.view.controller.fragment.mypage.MypageFragment
 import com.nimontoy.android.view.controller.fragment.feed.FeedFragment
 import com.nimontoy.android.view.controller.fragment.shop.ShopFragment
-import com.nimontoy.android.viewmodel.controller.main.MainViewModel
+import com.nimontoy.android.viewmodel.controller.home.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +26,7 @@ import org.koin.core.parameter.parametersOf
  */
 class MainActivity : BaseActivity() {
 
-    private val viewModel by viewModel<MainViewModel> { parametersOf() }
+    private val viewModel by viewModel<HomeViewModel> { parametersOf() }
     private val fmMgr: FragmentManager by lazy { supportFragmentManager }
     private lateinit var ft: FragmentTransaction
 

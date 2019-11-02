@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nimontoy.android.R
+import com.nimontoy.android.view.adapter.DataRecyclerAdapter
 import com.nimontoy.android.view.controller.fragment.DataListFragment
+import com.nimontoy.android.viewmodel.controller.home.HomeViewModel
 
 class HomeFragment : DataListFragment() {
 
@@ -17,10 +19,15 @@ class HomeFragment : DataListFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        /*initViews(view)
+        viewModel = HomeViewModel()
+
+        dataRecyclerAdapter = DataRecyclerAdapter(viewModel.dataList)
+
+        initViews(view)
         bindViews()
-        initData()*/
+        initData()
         return view
+        //todo create ViewHolder classs, Mapper, mainHomeModel class and so on...
     }
 
     override fun initViews(view: View) {

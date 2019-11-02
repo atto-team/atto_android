@@ -17,6 +17,7 @@ object DataLayoutMapper {
             Type.PROFILE_CELL -> R.layout.viewholder_profile
             Type.SPACE_CELL -> R.layout.viewholder_space
             Type.EVENT_CARD_CELL -> R.layout.viewholder_event_card
+            Type.HOME_CELL -> R.layout.viewholder_home
             else -> R.layout.viewholder_empty
         }
     }

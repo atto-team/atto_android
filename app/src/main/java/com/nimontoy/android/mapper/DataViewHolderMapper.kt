@@ -19,6 +19,7 @@ object DataViewHolderMapper {
             R.layout.viewholder_header -> UserNameViewHolder(itemView)
             R.layout.viewholder_profile ->ProfileViewHolder(itemView)
             R.layout.viewholder_event_card -> EventCardViewHolder(itemView)
+            R.layout.viewholder_home -> HomeViewHolder(itemView)
             else -> EmptyViewHolder(itemView)
         }
     }

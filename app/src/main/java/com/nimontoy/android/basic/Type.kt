@@ -10,5 +10,6 @@ enum class Type(var type: String) {
     HEADER_CELL("header.cell"),
     PROFILE_CELL("profile.cell"),
     SPACE_CELL("space.cell"),
-    EVENT_CARD_CELL("event.card.cell")
+    EVENT_CARD_CELL("event.card.cell"),
+    HOME_CELL("home.cell"),
 }

@@ -40,4 +40,6 @@
 
     <declare-styleable name="ElementsCellView" />
 
+    <declare-styleable name="HomeToyCell"/>
+
 </resources>
