@@ -2,7 +2,6 @@ package com.nimontoy.android.view.custom
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,9 @@ class UserCellView : ConstraintLayout{
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.profile_cell, this, false) }
 
-    val imageProfile by lazy<ImageView> { findViewById(R.id.image_profile) }
-    val textUserName by lazy<TextView> { findViewById(R.id.text_userName_profile) }
-    val textDate by lazy<TextView> { findViewById(R.id.text_date_profile) }
+    private val profileImage by lazy<ImageView> { findViewById(R.id.profile_image) }
+    private val usernameText by lazy<TextView> { findViewById(R.id.username_text) }
+    private val dateText by lazy<TextView> { findViewById(R.id.date_text) }
 
 
     constructor(context: Context) : super(context)
@@ -49,25 +48,21 @@ class UserCellView : ConstraintLayout{
 
     private fun setTypeArray(typedArray: TypedArray) {
         val imageProfileSrc = typedArray.getResourceId(R.styleable.UserCellView_image_profile_src, 0)
-        imageProfile.setImageResource(imageProfileSrc)
+        profileImage.setImageResource(imageProfileSrc)
         val userName = typedArray.getString(R.styleable.UserCellView_username_text)
-        textUserName.text = userName
+        usernameText.text = userName
 
         val date = typedArray.getString(R.styleable.UserCellView_date)
-        textDate.text = date
+        dateText.text = date
 
         typedArray.recycle()
     }
 
-    fun setImageProfile (image_res : Int) {
-        imageProfile.setImageResource(image_res)
-    }
-
     fun setUserNameText (userName : String) {
-        textUserName.text = userName
+        usernameText.text = userName
     }
 
     fun setDateTimeText (date : String) {
-        textDate.text = date
+        dateText.text = date
     }
 }

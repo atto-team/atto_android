@@ -61,6 +61,7 @@ object RedirectHelper {
     }
 
     fun goToMain(context: Context) {
+
         goToActivity(context, MainActivity::class)
     }
 

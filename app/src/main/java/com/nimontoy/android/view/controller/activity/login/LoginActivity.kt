@@ -59,7 +59,10 @@ class LoginActivity : BaseActivity() {
         setFacebookLogin() //facebook
     }
 
-    private fun checkAuth() = auth.currentUser?.let { goToMain(this) }
+    private fun checkAuth() = auth.currentUser?.let {
+        goToMain(this)
+        finish()
+    }
 
     private fun setFacebookLogin() {
         facebook_login.setReadPermissions("email", "public_profile")
@@ -168,7 +171,7 @@ class LoginActivity : BaseActivity() {
     fun getKeyHash(context: Context): String? {
         val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
 
-        for (signature in packageInfo!!.signatures) {
+        for (signature in packageInfo.signatures) {
             try {
                 val md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
