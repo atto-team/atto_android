@@ -12,11 +12,11 @@ data class Profile(
     override var scheme: String = "null",
     var userName: String = "null",
     var image: String ?= null,
-    var follow: String = "000000",
-    var follower: String = "000000",
+    var follow: String = "0",
+    var follower: String = "0",
 
     var activity: Int = 0,
     var like: Int = 0,
     var point: Int = 0,
-    var toys: MutableList<Toy?>? = null
+    var toys: MutableList<Toy>? = null
 ): Data(), Parcelable

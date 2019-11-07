@@ -14,17 +14,18 @@ class HeaderViewHolder (itemView: View) : DataViewHolder(itemView) {
     private val headerText by lazy { itemView.findViewById<TextView>(R.id.header_text) }
 
     override fun reset() {
+        headerText.setText("Hello, Ghost User!")
     }
 
     override fun bindData(data: Data, viewModel: DataCellViewModel) {
         super.bindData(data, viewModel)
         if (data is Profile) {
-            val user = data
-            headerText.setText("Hello, "+user.userName+"!")
+            headerText.setText("Hello, "+data.userName+"!")
         }
     }
 
     override fun bindViews(data: Data) {
+        //Todo 클릭 이벤트 작성
     }
 
 }

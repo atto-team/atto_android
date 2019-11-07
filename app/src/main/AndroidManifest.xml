@@ -33,6 +33,10 @@
             android:name="com.nimontoy.android.view.controller.activity.main.MainActivity"
             android:theme="@style/AppNoBarTheme"/>
 
+        <activity
+            android:name="com.nimontoy.android.view.controller.activity.FollowActivity"
+            android:theme="@style/AppNoBarTheme"/>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key"/>

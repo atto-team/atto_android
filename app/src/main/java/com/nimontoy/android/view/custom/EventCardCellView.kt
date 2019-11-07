@@ -11,19 +11,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.nimontoy.android.R
 
 class EventCardCellView : ConstraintLayout {
-    companion object {
-        private val VIEW_VISIBLE = "visible"
-        private val VIEW_INVISIBLE = "invisible"
-        private val VIEW_GONE = "gone"
-    }
-
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.event_card_cell, this, false) }
 
     val eventText by lazy<TextView> { findViewById(R.id.button_text) }
     val arrowButton by lazy<Button> { findViewById(R.id.arrow_button) }
     val moreButton by lazy<Button> { findViewById(R.id.more_button) }
-
 
     constructor(context: Context) : super(context)
 

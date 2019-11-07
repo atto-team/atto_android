@@ -22,7 +22,7 @@ class MyPageViewModel : DataListViewModel() {
         getTestProfileList().subscribe({
             onResponseWith(it.dataList)
         }, {
-            it.message?.let { it1 -> MinorHelper.toast(it1) }
+            it.message?.let { message -> MinorHelper.toast(message) }
         })
     }
 
@@ -74,7 +74,7 @@ class MyPageViewModel : DataListViewModel() {
 
                 add(Profile(
                     type = Type.MY_TOYS_CELL,
-                    toys = mutableListOf<Toy?>().apply {
+                    toys = mutableListOf<Toy>().apply {
                         add(Toy(name = "토이1"))
                     }
                 ))
@@ -82,7 +82,7 @@ class MyPageViewModel : DataListViewModel() {
 
                 add(Profile(
                     type = Type.MY_TOYS_CELL,
-                    toys = mutableListOf<Toy?>().apply {
+                    toys = mutableListOf<Toy>().apply {
                         add(Toy(name = "토이1"))
                         add(
                             Toy(

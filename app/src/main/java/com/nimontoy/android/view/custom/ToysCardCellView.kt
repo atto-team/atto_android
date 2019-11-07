@@ -69,8 +69,6 @@ class ToysCardCellView : ConstraintLayout {
         toyText.text = text
     }
 
-
-
     private fun setVisible(view: View, visibility: String?) {
         if (visibility != null) {
             when (visibility) {

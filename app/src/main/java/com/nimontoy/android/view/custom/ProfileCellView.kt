@@ -16,7 +16,7 @@ class ProfileCellView : ConstraintLayout{
     private val view: View by lazy { layoutInflater.inflate(R.layout.mypage_profile_cell, this, false) }
 
     val profileImage by lazy<UrlImageView> { findViewById(R.id.profileImageView) }
-    val QRcodeText by lazy<TextView> { findViewById(R.id.QRcode) }
+    val qrCodeText by lazy<TextView> { findViewById(R.id.QRcode) }
     val followText by lazy<TextView> { findViewById(R.id.follow) }
     val followerText by lazy<TextView> { findViewById(R.id.follower) }
 
@@ -74,6 +74,10 @@ class ProfileCellView : ConstraintLayout{
     }
 
     fun setQRcodeClickListener (listener : OnClickListener) {
-        QRcodeText.setOnClickListener(listener)
+        qrCodeText.setOnClickListener(listener)
+    }
+
+    fun setFollowClickListener (listener : OnClickListener) {
+        followText.setOnClickListener(listener)
     }
 }

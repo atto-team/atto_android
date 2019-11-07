@@ -2,23 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/follow_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="61dp"
         app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabTextColor="@color/colorBlack"
+        app:tabIndicatorHeight="49dp"
+        app:tabIndicatorColor="@color/colorPinkRed"
         tools:layout_editor_absoluteX="0dp"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <android.support.v4.view.ViewPager
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/follow_viewpager"/>
+<!--
+    <view
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintTop_toBottomOf="@+id/follow_tab"/>
+-->
+    <com.nimontoy.android.view.custom.PagingOptionViewPager
         android:id="@+id/follow_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/follow_tab"/>
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/follow_tab"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

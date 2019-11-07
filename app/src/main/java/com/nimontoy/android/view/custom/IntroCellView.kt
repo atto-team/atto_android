@@ -10,12 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.nimontoy.android.R
 
 class IntroCellView : ConstraintLayout {
-    companion object {
-        private val VIEW_VISIBLE = "visible"
-        private val VIEW_INVISIBLE = "invisible"
-        private val VIEW_GONE = "gone"
-    }
-
     private val layoutInflater: LayoutInflater by lazy { context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater }
     private val view: View by lazy { layoutInflater.inflate(R.layout.mypage_intro_cell, this, false) }
 
